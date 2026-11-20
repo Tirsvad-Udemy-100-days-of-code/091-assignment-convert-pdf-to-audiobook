@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-018]; stand-in for S01, not independent; plan accepted by S01 in chat | pending |
+| 2026-11-20 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | [ee19880] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-018]; stand-in for S01, not independent; plan accepted by S01 in chat | [ee19880] |
 
 ---
 
@@ -77,3 +77,4 @@ An Open PDF button and a file dialog in the window, a `speak_pdf` use case that 
 
 [BC-001]: ../business-case.md
 [RC-018]: ../sqa/reviews/rc-018-mil-007-open-pdf-in-window.md
+[ee19880]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/ee198802ba382293f2aae14950aa65ff5ba82dea
