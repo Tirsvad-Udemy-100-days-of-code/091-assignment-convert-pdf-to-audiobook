@@ -19,3 +19,4 @@ python tools/demo_speak.py "Coqui TTS turns this sentence into speech."
 - A port keeps the rest of the program independent of the engine, so another engine is one new class.
 - The default tests use a fake engine, so they run in a fraction of a second with the network blocked. One test marked `slow` uses the real engine (`python -m pytest -m slow`).
 - Picking a model is a trade-off: the model `vits` needs the `espeak-ng` system program, while `tacotron2-DCA` needs only Python packages.
+- The console stays quiet: the speech library prints phoneme text, warnings and download bars, so the program hides them and shows only its own lines. Add `--verbose` to the command or to the window to see the library output again when you diagnose a problem. Real errors are always shown.

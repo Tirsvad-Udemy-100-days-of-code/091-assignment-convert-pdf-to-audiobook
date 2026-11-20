@@ -8,6 +8,7 @@ import pytest
 from tests.fakes import FakeFileChooser, FakePlayer, FakeSpeechEngine
 
 from pdf_to_audiobook.domain.errors import PlaybackError
+from pdf_to_audiobook.presentation import window
 from pdf_to_audiobook.presentation.window import SpeakWindow, main
 from pdf_to_audiobook.presentation.window_model import SpeakViewModel
 
@@ -204,3 +205,23 @@ def test_late_worker_update_after_close_does_not_raise(
     monkeypatch.setattr(FakeTk, "after", _closed)
     model.speak("Hello there.")
     assert model.status == "Done"
+
+
+@pytest.mark.parametrize(("flags", "expected"), [([], False), (["--verbose"], True)])
+def test_main_passes_verbose_to_the_default_engine(
+    fake_tk: type[FakeTk],
+    monkeypatch: pytest.MonkeyPatch,
+    flags: list[str],
+    expected: bool,
+) -> None:
+    seen: list[bool] = []
+
+    class StubEngine(FakeSpeechEngine):
+        def __init__(self, model_name: str, verbose: bool) -> None:
+            super().__init__()
+            seen.append(verbose)
+
+    monkeypatch.setattr(window, "CoquiSpeechEngine", StubEngine)
+    code = main([*flags, "--script", "Hello there."], player_factory=FakePlayer)
+    assert code == 0
+    assert seen == [expected]

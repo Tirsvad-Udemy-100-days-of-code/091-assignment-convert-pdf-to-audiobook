@@ -106,6 +106,8 @@ pdf-to-audiobook my-book.pdf
 pdf-to-audiobook my-book.pdf -o audio/my-book.wav --model tts_models/en/ljspeech/tacotron2-DCA
 ```
 
+The speech library prints a lot of text while it works; the program hides it. Add `--verbose` to see it again, for example when you diagnose a problem. This works for the command and for the window.
+
 Without `-o` the audio is written next to the PDF with the suffix `.wav`. Exit code 0 means success, 1 an error (the message is on stderr) and 2 a wrong command line.
 
 In Python the assignment's function is available as `convert_pdf_to_audiobook(pdf_path, output_path, engine, extract_text)`; see the [wiki][wiki] for the design.

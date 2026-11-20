@@ -22,3 +22,4 @@ Exit code: 0 berjaya, 1 ralat dengan mesej pada stderr, 2 penggunaan perintah ya
 - Kebergantungan menghala ke dalam: use case mengenali port dan sebuah fungsi, bukan Coqui TTS atau `pypdf`.
 - Kemajuan dan ralat dihantar ke stderr dan hasilnya ke stdout, jadi program ini berfungsi dalam skrip.
 - Larian sebenar pada PDF sampel dua halaman menghasilkan kira-kira 17 saat suara.
+- Konsol kekal senyap: pustaka pertuturan mencetak teks fonem, amaran dan bar muat turun, jadi program menyembunyikannya dan hanya menunjukkan barisnya sendiri. Tambah `--verbose` pada arahan atau tetingkap untuk melihat output pustaka semula apabila anda menyiasat masalah. Ralat sebenar sentiasa dipaparkan.
