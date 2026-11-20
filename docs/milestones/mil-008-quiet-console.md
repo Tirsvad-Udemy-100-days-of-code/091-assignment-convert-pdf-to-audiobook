@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-21 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-020]; stand-in for S01, not independent; plan accepted by S01 in chat | pending |
+| 2026-11-21 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | [af93f22] |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-020]; stand-in for S01, not independent; plan accepted by S01 in chat | [af93f22] |
 
 ---
 
@@ -74,3 +74,4 @@ An output-quieting wrapper around the model calls in the Coqui TTS adapter, a `-
 
 [BC-001]: ../business-case.md
 [RC-020]: ../sqa/reviews/rc-020-mil-008-quiet-console.md
+[af93f22]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/af93f22d55f08dae087745bc41a00af2f4b93e60

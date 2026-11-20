@@ -12,7 +12,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-007 Open PDF in the window, accepted by S01 in chat | [ee19880] |
-| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-008 Quiet console, accepted by S01 in chat | pending |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-008 Quiet console, accepted by S01 in chat | [af93f22] |
 
 ---
 
@@ -110,3 +110,4 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MS-5]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/675
 [55d704e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/55d704ea3336af57f7634bf48a9d23f85ec10845
 [ee19880]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/ee198802ba382293f2aae14950aa65ff5ba82dea
+[af93f22]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/af93f22d55f08dae087745bc41a00af2f4b93e60
