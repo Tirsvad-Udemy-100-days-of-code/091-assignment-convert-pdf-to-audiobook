@@ -12,6 +12,13 @@ MAX_CHUNK_CHARS: Final[int] = 400
 ## File name suffix of the audio the program writes.
 AUDIO_FILE_SUFFIX: Final[str] = ".wav"
 
+## Name of the Coqui TTS voice model the speech engine loads by default.
+DEFAULT_MODEL_NAME: Final[str] = "tts_models/en/ljspeech/tacotron2-DCA"
+## Name of the file the speech engine writes inside its temporary folder.
+SPEECH_TEMP_FILE_NAME: Final[str] = "speech.wav"
+## Command that installs the project and its speech engine.
+INSTALL_COMMAND: Final[str] = "python -m pip install -e ."
+
 ## Exit code when the work succeeded.
 EXIT_OK: Final[int] = 0
 ## Exit code when the work failed.
