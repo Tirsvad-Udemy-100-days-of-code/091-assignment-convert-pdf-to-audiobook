@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-21 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-022]; stand-in for S01, not independent; plan accepted by S01 in chat | pending |
+| 2026-11-21 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | [87ca258] |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-022]; stand-in for S01, not independent; plan accepted by S01 in chat | [87ca258] |
 
 ---
 
@@ -74,3 +74,4 @@ A load notification from the Coqui TTS adapter, a "Loading voice" status in the 
 
 [BC-001]: ../business-case.md
 [RC-022]: ../sqa/reviews/rc-022-mil-009-loading-status.md
+[87ca258]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/87ca258aac9ad7c748e8d2f7ecbec04f370a025f

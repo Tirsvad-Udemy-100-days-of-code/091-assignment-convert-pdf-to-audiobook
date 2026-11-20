@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; autonomous stand-in for S01, not independent | pending |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; autonomous stand-in for S01, not independent | [87ca258] |
 
 ---
 
@@ -63,3 +63,4 @@ Go — every criterion passes (criteria 1 to 6 and QC-LANG-001 criteria 1 to 10)
 [MIL-009]: ../../milestones/mil-009-loading-status.md
 [QC-MIL-001]: ../../../framework/qc/artifacts/qc-milestones-gateways.md
 [QC-LANG-001]: ../../../framework/qc/artifacts/qc-language-domain.md
+[87ca258]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/87ca258aac9ad7c748e8d2f7ecbec04f370a025f
