@@ -4,15 +4,15 @@
 | Key | Value |
 | --- | --- |
 | ID | PP-001 |
-| CrossReference | [BC-001], [SA-001], [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006], [MIL-007], [MIL-008] |
+| CrossReference | [BC-001], [SA-001], [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006], [MIL-007], [MIL-008], [MIL-009] |
 | Language | en |
 | Domain | it |
 
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-007 Open PDF in the window, accepted by S01 in chat | [ee19880] |
 | 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-008 Quiet console, accepted by S01 in chat | [af93f22] |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-009 Loading status, accepted by S01 in chat | pending |
 
 ---
 
@@ -39,6 +39,7 @@ The plan schedules the five gateways of the PDF to Audiobook project over three 
 | Speak text window | [MIL-006] | 2026-11-22 | 2026-11-22 | S01 | none | Desktop window that speaks typed text through the speakers | to be published |
 | Open PDF in the window | [MIL-007] | 2026-11-22 | 2026-11-22 | S01 | none | Open a PDF from the window and speak it | to be published |
 | Quiet console | [MIL-008] | 2026-11-22 | 2026-11-22 | S01 | none | Hide library output unless `--verbose` | to be published |
+| Loading status | [MIL-009] | 2026-11-22 | 2026-11-22 | S01 | none | Show that the voice is loading in the window | to be published |
 
 ```plantuml
 @startgantt
@@ -72,7 +73,7 @@ Project starts 2026-11-20
 
 ```
 MIL-001 -> MIL-002 -> MIL-003 -> MIL-004 -> MIL-005
-MIL-004 -> MIL-006 -> MIL-007 -> MIL-008
+MIL-004 -> MIL-006 -> MIL-007 -> MIL-008 -> MIL-009
 ```
 
 A No-Go on a gateway moves every later date by the time needed to fix it; the end date 2026-11-22 is then re-planned with S01.
@@ -102,6 +103,7 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MIL-006]: ./milestones/mil-006-speak-text-window.md
 [MIL-007]: ./milestones/mil-007-open-pdf-in-window.md
 [MIL-008]: ./milestones/mil-008-quiet-console.md
+[MIL-009]: ./milestones/mil-009-loading-status.md
 [77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0
 [MS-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/671
 [MS-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/672
