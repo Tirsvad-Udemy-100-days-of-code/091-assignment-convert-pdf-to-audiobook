@@ -13,10 +13,10 @@ license-files = ["LICENSE"]
 authors = [{ name = "Jens Tirsvad Nielsen" }]
 keywords = ["pdf", "text-to-speech", "audiobook", "coqui-tts", "udemy"]
 dependencies = [
-  "pypdf>=5.0",
-  "coqui-tts[codec,languages]>=0.28",
-  "torch>=2.9",
-  "torchaudio>=2.9",
+  "pypdf~=7.1",
+  "coqui-tts[codec,languages]~=0.28.0",
+  "torch~=2.15",
+  "torchaudio~=2.11",
 ]
 
 [project.scripts]
@@ -24,10 +24,10 @@ pdf-to-audiobook = "pdf_to_audiobook.presentation.cli:main"
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=8.3",
-  "pytest-cov>=6.0",
-  "ruff>=0.8",
-  "mypy>=1.13",
+  "pytest~=9.2",
+  "pytest-cov~=7.1",
+  "ruff~=0.17",
+  "mypy~=2.4",
 ]
 
 [tool.setuptools.packages.find]
