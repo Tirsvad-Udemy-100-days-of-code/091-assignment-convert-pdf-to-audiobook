@@ -16,7 +16,7 @@ doxygen Doxyfile
 pwsh scripts/scan.ps1
 ```
 
-- 86 fast tests cover 99 percent of the source. A fixture blocks the network, so no test can reach the internet.
+- 110 fast tests cover 98 percent of the source. A fixture blocks the network, so no test can reach the internet.
 - `ruff` checks style, `mypy` in strict mode checks types, Doxygen builds the API documentation from the comments in the source.
 - `scripts/scan.ps1` runs the opengrep security scan before every push, and the host runs it again on every pull request.
 

@@ -43,3 +43,16 @@ class FakeSpeechEngine:
             channels=FAKE_CHANNELS,
             sample_width=FAKE_SAMPLE_WIDTH,
         )
+
+
+class FakePlayer:
+    """An AudioPlayer that records the clips it got and plays nothing."""
+
+    def __init__(self, error: Exception | None = None) -> None:
+        self.clips: list[AudioClip] = []
+        self._error = error
+
+    def play(self, clip: AudioClip) -> None:
+        if self._error is not None:
+            raise self._error
+        self.clips.append(clip)

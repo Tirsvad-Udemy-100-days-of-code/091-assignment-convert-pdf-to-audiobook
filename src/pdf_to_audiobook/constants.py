@@ -41,3 +41,23 @@ PROGRAM_DESCRIPTION: Final[str] = "Convert a PDF file into an audiobook (WAV fil
 WAV_READ_MODE: Final[str] = "rb"
 ## Mode that opens a WAV file for writing.
 WAV_WRITE_MODE: Final[str] = "wb"
+
+## Command that installs the audio playback package.
+PLAYBACK_INSTALL_COMMAND: Final[str] = "python -m pip install sounddevice"
+## Number of bytes per sample the player supports (16-bit audio).
+PLAYBACK_SAMPLE_WIDTH: Final[int] = 2
+
+## Name of the window program.
+WINDOW_PROGRAM_NAME: Final[str] = "pdf-to-audiobook-window"
+## Description shown in the window program help.
+WINDOW_PROGRAM_DESCRIPTION: Final[str] = "Type text in a window and hear it spoken."
+## Title of the window.
+WINDOW_TITLE: Final[str] = "Speak text"
+## Status shown before anything is spoken.
+STATUS_READY: Final[str] = "Ready"
+## Status shown while text is spoken.
+STATUS_SPEAKING: Final[str] = "Speaking..."
+## Status shown when speaking finished.
+STATUS_DONE: Final[str] = "Done"
+## Prefix of the status shown when speaking failed.
+STATUS_ERROR_PREFIX: Final[str] = "error: "

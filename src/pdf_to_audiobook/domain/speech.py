@@ -31,3 +31,16 @@ class SpeechEngine(Protocol):
         @throws SpeechEngineError If the text cannot be turned into audio.
         """
         ...
+
+
+class AudioPlayer(Protocol):
+    """!@brief Plays spoken audio through the speakers."""
+
+    def play(self, clip: AudioClip) -> None:
+        """!@brief Play one clip and return when it has finished.
+
+        @param clip The WAV clip to play.
+        @return Nothing.
+        @throws PlaybackError If the clip cannot be played.
+        """
+        ...

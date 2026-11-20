@@ -23,3 +23,11 @@ class AudioJoinError(AudiobookError):
 
 class OutputWriteError(AudiobookError):
     """!@brief The audiobook file could not be written."""
+
+
+class PlaybackError(AudiobookError):
+    """!@brief Audio could not be played through the speakers."""
+
+
+class EmptyTextError(AudiobookError):
+    """!@brief There is no text to speak."""

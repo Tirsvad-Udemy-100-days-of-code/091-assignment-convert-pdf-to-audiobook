@@ -6,6 +6,7 @@
 - [Step 3: Speak with Coqui TTS](Step-3-Speak-with-Coqui-TTS)
 - [Step 4: Convert and command line](Step-4-Convert-and-Command-Line)
 - [Step 5: Tests and quality](Step-5-Tests-and-Quality)
+- [Step 6: Speak text window](Step-6-Speak-Text-Window)
 - [Design](Design)
 - [Reflection](Reflection)
 

@@ -17,6 +17,7 @@ Hvert trin har en side med et skærmbillede og en forklaring af, hvad vi fik ud 
 | 3 | [Trin 3: Tal med Coqui TTS](Step-3-Speak-with-Coqui-TTS-da) | Omdan et stykke tekst til lyd |
 | 4 | [Trin 4: Konvertering og kommandolinje](Step-4-Convert-and-Command-Line-da) | Hele konverteringen fra en terminal |
 | 5 | [Trin 5: Tests og kvalitet](Step-5-Tests-and-Quality-da) | Tests, typer, stil og sikkerhedsscanningen |
+| 6 | [Trin 6: Vinduet der læser tekst op](Step-6-Speak-Text-Window-da) | Skriv tekst og hør den i højttalerne |
 
 Læs også [Design](Design-da) om, hvordan koden er opdelt i lag, og [Refleksion](Reflection-da) om, hvad vi lærte.
 

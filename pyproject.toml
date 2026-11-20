@@ -17,10 +17,12 @@ dependencies = [
   "coqui-tts[codec,languages]~=0.28.0",
   "torch~=2.15",
   "torchaudio~=2.11",
+  "sounddevice~=0.5",
 ]
 
 [project.scripts]
 pdf-to-audiobook = "pdf_to_audiobook.presentation.cli:main"
+pdf-to-audiobook-window = "pdf_to_audiobook.presentation.window:main"
 
 [project.optional-dependencies]
 dev = [
@@ -67,5 +69,5 @@ strict = true
 files = ["src"]
 
 [[tool.mypy.overrides]]
-module = ["TTS", "TTS.*"]
+module = ["TTS", "TTS.*", "sounddevice", "sounddevice.*"]
 ignore_missing_imports = true
