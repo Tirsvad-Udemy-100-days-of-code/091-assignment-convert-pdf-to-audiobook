@@ -12,6 +12,7 @@ def speak_text(
     engine: SpeechEngine,
     player: AudioPlayer,
     progress: Callable[[int, int], None] | None = None,
+    should_stop: Callable[[], bool] | None = None,
 ) -> int:
     """!@brief Speak a text chunk by chunk, in order.
 
@@ -19,6 +20,7 @@ def speak_text(
     @param engine The speech engine that speaks each chunk.
     @param player The player that plays each clip.
     @param progress Called as progress(done, total) after each played chunk.
+    @param should_stop Asked before each chunk; True ends the speech early.
     @return The number of chunks spoken.
     @throws EmptyTextError If the text is blank.
     @throws SpeechEngineError If a chunk cannot be spoken (from the engine).
@@ -27,8 +29,33 @@ def speak_text(
     chunks = split_text_into_chunks(text.strip())
     if not chunks:
         raise EmptyTextError("There is no text to speak.")
-    for done, chunk in enumerate(chunks, start=1):
+    return speak_chunks(chunks, engine, player, progress, should_stop)
+
+
+def speak_chunks(
+    chunks: list[str],
+    engine: SpeechEngine,
+    player: AudioPlayer,
+    progress: Callable[[int, int], None] | None = None,
+    should_stop: Callable[[], bool] | None = None,
+) -> int:
+    """!@brief Synthesize and play each chunk in order, stopping when asked.
+
+    @param chunks The text chunks to speak.
+    @param engine The speech engine that speaks each chunk.
+    @param player The player that plays each clip.
+    @param progress Called as progress(done, total) after each played chunk.
+    @param should_stop Asked before each chunk; True ends the speech early.
+    @return The number of chunks spoken.
+    @throws SpeechEngineError If a chunk cannot be spoken (from the engine).
+    @throws PlaybackError If a clip cannot be played (from the player).
+    """
+    done = 0
+    for chunk in chunks:
+        if should_stop is not None and should_stop():
+            break
         player.play(engine.synthesize(chunk))
+        done += 1
         if progress is not None:
             progress(done, len(chunks))
-    return len(chunks)
+    return done

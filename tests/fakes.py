@@ -1,5 +1,7 @@
 import io
 import wave
+from collections.abc import Callable
+from pathlib import Path
 
 from pdf_to_audiobook.domain.speech import AudioClip
 
@@ -56,3 +58,26 @@ class FakePlayer:
         if self._error is not None:
             raise self._error
         self.clips.append(clip)
+
+
+class FakeFileChooser:
+    """A FileChooser that returns a fixed path, or None like a cancelled dialog."""
+
+    def __init__(self, path: Path | None) -> None:
+        self.path = path
+        self.asked = 0
+
+    def choose_pdf(self) -> Path | None:
+        self.asked += 1
+        return self.path
+
+
+def fake_extract_text(
+    text: str = "First page text.\n\nSecond page text.",
+) -> Callable[[Path], str]:
+    """Return an extract_text function that gives the same text for any path."""
+
+    def _extract(path: Path) -> str:
+        return text
+
+    return _extract

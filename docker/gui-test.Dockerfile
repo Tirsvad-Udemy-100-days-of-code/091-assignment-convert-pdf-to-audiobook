@@ -9,3 +9,6 @@ RUN apt-get update \
 WORKDIR /app
 ENV PYTHONPATH=/app/src:/app
 ENV PYTHONDONTWRITEBYTECODE=1
+
+# pypdf reads the sample PDF the window test opens; nothing else is installed.
+RUN pip install --no-cache-dir "pypdf~=7.1"

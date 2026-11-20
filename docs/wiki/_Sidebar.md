@@ -7,6 +7,7 @@
 - [Step 4: Convert and command line](Step-4-Convert-and-Command-Line)
 - [Step 5: Tests and quality](Step-5-Tests-and-Quality)
 - [Step 6: Speak text window](Step-6-Speak-Text-Window)
+- [Step 7: Open a PDF in the window](Step-7-Open-PDF-in-the-Window)
 - [Design](Design)
 - [Reflection](Reflection)
 

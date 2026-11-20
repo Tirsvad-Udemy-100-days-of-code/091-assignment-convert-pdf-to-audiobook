@@ -16,7 +16,7 @@ doxygen Doxyfile
 pwsh scripts/scan.ps1
 ```
 
-- 110 hurtige tests dækker 98 procent af kildekoden. En fixture blokerer netværket, så ingen test kan nå internettet.
+- 131 hurtige tests dækker 99 procent af kildekoden. En fixture blokerer netværket, så ingen test kan nå internettet.
 - `ruff` tjekker stil, `mypy` i striks tilstand tjekker typer, og Doxygen bygger API-dokumentationen ud fra kommentarerne i kildekoden.
 - `scripts/scan.ps1` kører sikkerhedsscanningen med opengrep før hver push, og værten kører den igen på hver pull request.
 

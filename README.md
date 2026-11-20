@@ -26,7 +26,7 @@ The program extracts the text of a PDF with `pypdf`, splits it into pieces of at
 | `docker/` | The image and the script of the window test |
 | `tools/` | `capture_step.py`, which renders command output as an SVG image for the documentation |
 
-The project is built in six lecture steps. Each step has a screenshot below and a page in the [wiki][wiki] (English, Danish and Bahasa Malaysia) that explains what we gained.
+The project is built in seven lecture steps. Each step has a screenshot below and a page in the [wiki][wiki] (English, Danish and Bahasa Malaysia) that explains what we gained.
 
 ### Step 1: Environment
 
@@ -51,6 +51,10 @@ The project is built in six lecture steps. Each step has a screenshot below and 
 ### Step 6: The speak text window
 
 ![Step 6: the speak text window][step-6]
+
+### Step 7: Open a PDF in the window
+
+![Step 7: open a PDF in the window][step-7]
 
 ## 📋 Requirements
 
@@ -106,9 +110,9 @@ Without `-o` the audio is written next to the PDF with the suffix `.wav`. Exit c
 
 In Python the assignment's function is available as `convert_pdf_to_audiobook(pdf_path, output_path, engine, extract_text)`; see the [wiki][wiki] for the design.
 
-### Speak typed text
+### Speak typed text or a PDF
 
-Open a window, type text and press Speak to hear it through the speakers:
+Open a window, type text and press Speak, or press Open PDF to pick a PDF file, and hear it through the speakers. Stop ends the speech:
 
 ```powershell
 pdf-to-audiobook-window
@@ -188,6 +192,7 @@ The documents a newcomer needs, in reading order.
 [step-4]: ./docs/images/step-04-cli.svg
 [step-5]: ./docs/images/step-05-tests.svg
 [step-6]: ./docs/images/step-06-window.svg
+[step-7]: ./docs/images/step-07-open-pdf.svg
 [BC-001]: ./docs/business-case.md
 [SA-001]: ./docs/stakeholder-analysis.md
 [PP-001]: ./docs/project-plan.md

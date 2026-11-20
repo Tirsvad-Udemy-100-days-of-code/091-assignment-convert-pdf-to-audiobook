@@ -18,6 +18,7 @@ Setiap langkah mempunyai satu halaman yang menunjukkan tangkapan skrin dan mener
 | 4 | [Langkah 4: Tukar dan baris perintah](Step-4-Convert-and-Command-Line-ms) | Keseluruhan penukaran dari terminal |
 | 5 | [Langkah 5: Ujian dan kualiti](Step-5-Tests-and-Quality-ms) | Ujian, jenis data, gaya kod dan imbasan keselamatan |
 | 6 | [Langkah 6: Tetingkap bacaan teks](Step-6-Speak-Text-Window-ms) | Taip teks dan dengar melalui pembesar suara |
+| 7 | [Langkah 7: Buka PDF dalam tetingkap](Step-7-Open-PDF-in-the-Window-ms) | Buka PDF dan dengarnya, dengan butang Stop |
 
 Baca juga [Reka bentuk](Design-ms) untuk melihat bagaimana kod dilapiskan dan [Refleksi](Reflection-ms) untuk apa yang kita pelajari.
 

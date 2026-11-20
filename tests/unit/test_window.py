@@ -2,12 +2,14 @@ import sys
 import threading
 import types
 from collections.abc import Callable
+from pathlib import Path
 
 import pytest
-from tests.fakes import FakePlayer, FakeSpeechEngine
+from tests.fakes import FakeFileChooser, FakePlayer, FakeSpeechEngine
 
 from pdf_to_audiobook.domain.errors import PlaybackError
-from pdf_to_audiobook.presentation.window import main
+from pdf_to_audiobook.presentation.window import SpeakWindow, main
+from pdf_to_audiobook.presentation.window_model import SpeakViewModel
 
 WAIT_SECONDS = 5
 
@@ -74,6 +76,7 @@ def fake_tk(monkeypatch: pytest.MonkeyPatch) -> type[FakeTk]:
     module = types.ModuleType("tkinter")
     module.Tk = FakeTk  # type: ignore[attr-defined]
     module.Text = FakeWidget  # type: ignore[attr-defined]
+    module.Frame = FakeWidget  # type: ignore[attr-defined]
     module.Button = FakeWidget  # type: ignore[attr-defined]
     module.Label = FakeWidget  # type: ignore[attr-defined]
     module.TclError = FakeTclError  # type: ignore[attr-defined]
@@ -125,3 +128,47 @@ def test_main_returns_two_for_unknown_option() -> None:
 
 def test_main_returns_zero_for_help() -> None:
     assert main(["--help"]) == 0
+
+
+def run_open_pdf(chooser: FakeFileChooser, player: FakePlayer) -> int:
+    return main(
+        ["--open-pdf"],
+        engine_factory=lambda _name: FakeSpeechEngine(),
+        player_factory=lambda: player,
+        chooser_factory=lambda: chooser,
+    )
+
+
+def test_main_open_pdf_speaks_the_chosen_file(
+    fake_tk: type[FakeTk], make_pdf: Callable[[list[str]], Path]
+) -> None:
+    player = FakePlayer()
+    code = run_open_pdf(FakeFileChooser(make_pdf(["One.", "Two."])), player)
+    assert code == 0
+    assert len(player.clips) == 2
+
+
+def test_main_open_pdf_exits_one_when_the_dialog_is_cancelled(
+    fake_tk: type[FakeTk],
+) -> None:
+    chooser = FakeFileChooser(None)
+    assert run_open_pdf(chooser, FakePlayer()) == 1
+    assert chooser.asked == 1
+
+
+def test_main_open_pdf_exits_one_for_a_missing_file(
+    fake_tk: type[FakeTk], tmp_path: Path
+) -> None:
+    code = run_open_pdf(FakeFileChooser(tmp_path / "missing.pdf"), FakePlayer())
+    assert code == 1
+
+
+def test_window_stop_and_key_events_refresh_without_error(
+    fake_tk: type[FakeTk],
+) -> None:
+    model = SpeakViewModel(FakeSpeechEngine(), FakePlayer(), lambda _path: "x")
+    window = SpeakWindow(FakeTk(), model, FakeFileChooser(None))
+    window.click_stop()
+    window._on_key(None)
+    assert not window.click_speak()
+    assert not window.click_open()

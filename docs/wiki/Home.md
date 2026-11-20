@@ -18,6 +18,7 @@ Each step has a page that shows a screenshot and explains what we gained.
 | 4 | [Step 4: Convert and command line](Step-4-Convert-and-Command-Line) | The whole conversion from a terminal |
 | 5 | [Step 5: Tests and quality](Step-5-Tests-and-Quality) | Tests, types, style and the security scan |
 | 6 | [Step 6: Speak text window](Step-6-Speak-Text-Window) | Type text and hear it through the speakers |
+| 7 | [Step 7: Open a PDF in the window](Step-7-Open-PDF-in-the-Window) | Open a PDF and hear it, with a Stop button |
 
 Also read [Design](Design) for how the code is layered and [Reflection](Reflection) for what we learned.
 

@@ -1,42 +1,53 @@
 """@brief The view model of the speak window; it knows nothing of Tkinter."""
 
+import threading
 from collections.abc import Callable
+from pathlib import Path
 
+from pdf_to_audiobook.application.speak_pdf import speak_pdf
 from pdf_to_audiobook.application.speak_text import speak_text
 from pdf_to_audiobook.constants import (
     STATUS_DONE,
     STATUS_ERROR_PREFIX,
     STATUS_READY,
     STATUS_SPEAKING,
+    STATUS_SPEAKING_FILE_PREFIX,
+    STATUS_STOPPED,
 )
 from pdf_to_audiobook.domain.errors import AudiobookError
 from pdf_to_audiobook.domain.speech import AudioPlayer, SpeechEngine
 
 
 class SpeakViewModel:
-    """!@brief The status and busy flag of the window, and the speak command."""
+    """!@brief The status and busy flag of the window, and its commands."""
 
     def __init__(
         self,
         engine: SpeechEngine,
         player: AudioPlayer,
+        extract_text: Callable[[Path], str],
         on_change: Callable[[], None] | None = None,
     ) -> None:
         """!@brief Create the view model.
 
         @param engine The speech engine.
         @param player The audio player.
+        @param extract_text Function that returns the text of a PDF file.
         @param on_change Called after status or busy changes; the view sets it.
         """
         ## The speech engine.
         self._engine = engine
         ## The audio player.
         self._player = player
+        ## Function that returns the text of a PDF file.
+        self._extract_text = extract_text
+        ## Set by stop(); read between two chunks.
+        self._stop_requested = threading.Event()
         ## Called after status or busy changes.
         self.on_change = on_change
         ## Text shown to the user about the last or current action.
         self.status: str = STATUS_READY
-        ## True while a text is being spoken.
+        ## True while a text or a PDF file is being spoken.
         self.busy: bool = False
 
     def can_speak(self, text: str) -> bool:
@@ -47,6 +58,20 @@ class SpeakViewModel:
         """
         return not self.busy and bool(text.strip())
 
+    def can_open(self) -> bool:
+        """!@brief Tell whether the Open PDF command is available.
+
+        @return False while busy.
+        """
+        return not self.busy
+
+    def can_stop(self) -> bool:
+        """!@brief Tell whether the Stop command is available.
+
+        @return True only while busy.
+        """
+        return self.busy
+
     def speak(self, text: str) -> None:
         """!@brief Speak the text and update status and busy; blocks until done.
 
@@ -55,13 +80,65 @@ class SpeakViewModel:
         @param text The text to speak.
         @return Nothing.
         """
-        self._update(STATUS_SPEAKING, busy=True)
+        self._run(
+            STATUS_SPEAKING,
+            lambda: speak_text(
+                text, self._engine, self._player, should_stop=self._should_stop
+            ),
+        )
+
+    def open_pdf(self, path: str | Path) -> None:
+        """!@brief Speak a PDF file and update status and busy; blocks until done.
+
+        The status shows the file name while speaking. An error of the program
+        is shown as a status message, never raised.
+
+        @param path Path of the PDF file.
+        @return Nothing.
+        """
+        pdf_path = Path(path)
+        self._run(
+            f"{STATUS_SPEAKING_FILE_PREFIX}{pdf_path.name}",
+            lambda: speak_pdf(
+                pdf_path,
+                self._engine,
+                self._player,
+                self._extract_text,
+                should_stop=self._should_stop,
+            ),
+        )
+
+    def stop(self) -> None:
+        """!@brief Ask the running speech to end before its next chunk.
+
+        @return Nothing.
+        """
+        if self.busy:
+            self._stop_requested.set()
+
+    def _should_stop(self) -> bool:
+        """!@brief Tell whether stop() was called since the command began.
+
+        @return True when the speech must end.
+        """
+        return self._stop_requested.is_set()
+
+    def _run(self, speaking_status: str, command: Callable[[], int]) -> None:
+        """!@brief Run a speaking command with status, busy and error handling.
+
+        @param speaking_status The status shown while the command runs.
+        @param command The command; it returns the number of chunks spoken.
+        @return Nothing.
+        """
+        self._stop_requested.clear()
+        self._update(speaking_status, busy=True)
         try:
-            speak_text(text, self._engine, self._player)
+            command()
         except AudiobookError as error:
             self._update(f"{STATUS_ERROR_PREFIX}{error}", busy=False)
         else:
-            self._update(STATUS_DONE, busy=False)
+            stopped = self._stop_requested.is_set()
+            self._update(STATUS_STOPPED if stopped else STATUS_DONE, busy=False)
 
     def _update(self, status: str, *, busy: bool) -> None:
         """!@brief Set status and busy, then tell the view.
