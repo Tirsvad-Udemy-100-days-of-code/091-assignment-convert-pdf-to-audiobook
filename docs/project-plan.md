@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Accepted by the Product Owner S01 through acceptance of the plan in chat on 2026-11-20; no checklist exists for the Project Plan | pending |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [77d0001] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Accepted by the Product Owner S01 through acceptance of the plan in chat on 2026-11-20; no checklist exists for the Project Plan | [77d0001] |
 
 ---
 
@@ -95,3 +95,4 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MIL-003]: ./milestones/mil-003-speech-engines.md
 [MIL-004]: ./milestones/mil-004-converter-and-cli.md
 [MIL-005]: ./milestones/mil-005-documentation-and-wiki.md
+[77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0

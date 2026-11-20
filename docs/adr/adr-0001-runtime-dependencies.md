@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-003]; stand-in for S01, not independent | pending |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [77d0001] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-003]; stand-in for S01, not independent | [77d0001] |
 
 Allowed Status values: `Proposed`, `Accepted`, `Rejected`, `Deprecated`, `Superseded by ADR-NNNN`.
 
@@ -46,3 +46,4 @@ The Business Case asks for few runtime dependencies (success criterion 7), and S
 - [BC-001] — success criterion 7 reads "at most 1 required dependency"
 - [SA-001] — conflict between S03's concern and the need to read PDFs
 [RC-003]: ../sqa/reviews/rc-003-adr-0001-runtime-dependencies.md
+[77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0

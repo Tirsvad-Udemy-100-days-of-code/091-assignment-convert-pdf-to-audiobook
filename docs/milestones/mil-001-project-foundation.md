@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-004]; stand-in for S01, not independent; language criteria confirmed by S01 in chat | pending |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [77d0001] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-004]; stand-in for S01, not independent; language criteria confirmed by S01 in chat | [77d0001] |
 
 ---
 
@@ -75,3 +75,4 @@ A repository with `pyproject.toml`, `src/` and `tests/` skeleton, `constants.py`
 
 [BC-001]: ../business-case.md
 [RC-004]: ../sqa/reviews/rc-004-mil-001-project-foundation.md
+[77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0
