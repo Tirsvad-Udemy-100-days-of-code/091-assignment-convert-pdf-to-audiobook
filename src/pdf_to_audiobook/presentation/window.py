@@ -55,7 +55,8 @@ class SpeakWindow:
         ## The label that shows the status.
         self._status = tk.Label(root, anchor="w")
         self._status.pack(fill="x", padx=8, pady=4)
-        self._text.bind("<KeyRelease>", lambda _event: self.refresh())
+        ## Method called when the user types in the text box.
+        self._text.bind("<KeyRelease>", self._on_key)
         model.on_change = self._schedule_refresh
         self.refresh()
 
@@ -107,6 +108,14 @@ class SpeakWindow:
         self._model.speak(text)
         ## Method posted to the main thread when speaking has ended.
         self._root.after(0, self._finish)
+
+    def _on_key(self, _event: object) -> None:
+        """!@brief Update the button after the user typed in the text box.
+
+        @param _event The Tkinter key event; not used.
+        @return Nothing.
+        """
+        self.refresh()
 
     def _schedule_refresh(self) -> None:
         """!@brief Post a refresh to the main thread; safe from any thread.
