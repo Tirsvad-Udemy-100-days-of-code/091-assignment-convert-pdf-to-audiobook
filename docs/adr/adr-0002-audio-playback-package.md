@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; reviewed Go in [RC-016]; stand-in for S01, not independent | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; reviewed Go in [RC-016]; stand-in for S01, not independent | [359c357] |
 
 Allowed Status values: `Proposed`, `Accepted`, `Rejected`, `Deprecated`, `Superseded by ADR-NNNN`.
 
@@ -51,3 +51,4 @@ The speak-text window of [MIL-006] must play the synthesized speech through the 
 [ADR-0001]: ./adr-0001-runtime-dependencies.md
 [MIL-006]: ../milestones/mil-006-speak-text-window.md
 [RC-016]: ../sqa/reviews/rc-016-adr-0002-audio-playback-package.md
+[359c357]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/359c357f97c4df7626b2f192adeb4e44062597c4
