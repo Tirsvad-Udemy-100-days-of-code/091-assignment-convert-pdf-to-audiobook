@@ -14,6 +14,9 @@ authors = [{ name = "Jens Tirsvad Nielsen" }]
 keywords = ["pdf", "text-to-speech", "audiobook", "coqui-tts", "udemy"]
 dependencies = [
   "pypdf>=5.0",
+  "coqui-tts[codec,languages]>=0.28",
+  "torch>=2.9",
+  "torchaudio>=2.9",
 ]
 
 [project.optional-dependencies]
@@ -31,9 +34,9 @@ where = ["src"]
 minversion = "8.0"
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = "-ra --strict-markers"
+addopts = "-ra --strict-markers -m 'not slow'"
 markers = [
-  "slow: runs the real speech engine and needs the voice model (deselected by default)",
+  "slow: runs the real speech engine and needs the voice model (run with -m slow)",
 ]
 
 [tool.coverage.run]
@@ -59,3 +62,7 @@ ignore = ["D203", "D213"]
 python_version = "3.13"
 strict = true
 files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["TTS", "TTS.*"]
+ignore_missing_imports = true
