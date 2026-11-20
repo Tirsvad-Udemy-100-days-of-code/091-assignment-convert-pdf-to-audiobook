@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; autonomous stand-in for S01, not independent | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; autonomous stand-in for S01, not independent | [d08115d] |
 
 ---
 
@@ -45,3 +45,4 @@ Go — every criterion passes for the changed criteria; the other criteria hold 
 
 [ADR-0001]: ../../adr/adr-0001-runtime-dependencies.md
 [QC-ADR-001]: ../../../framework/qc/artifacts/qc-adr.md
+[d08115d]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/d08115d578aa0b0aaf701baba47434dcf2ba76e9

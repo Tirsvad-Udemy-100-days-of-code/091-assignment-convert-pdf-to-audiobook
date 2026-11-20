@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-003]; stand-in for S01, not independent | [77d0001] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Declared the PyTorch libraries and the voice model, added the verification of the Coqui TTS install; reviewed Go in [RC-011] (delta); stand-in for S01, not independent | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Declared the PyTorch libraries and the voice model, added the verification of the Coqui TTS install; reviewed Go in [RC-011] (delta); stand-in for S01, not independent | [d08115d] |
 
 Allowed Status values: `Proposed`, `Accepted`, `Rejected`, `Deprecated`, `Superseded by ADR-NNNN`.
 
@@ -52,3 +52,4 @@ Checked on 2026-11-20 on Windows with Python 3.13.14 in a fresh `.venv`: `coqui-
 [RC-003]: ../sqa/reviews/rc-003-adr-0001-runtime-dependencies.md
 [77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0
 [RC-011]: ../sqa/reviews/rc-011-adr-0001-delta.md
+[d08115d]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/d08115d578aa0b0aaf701baba47434dcf2ba76e9
