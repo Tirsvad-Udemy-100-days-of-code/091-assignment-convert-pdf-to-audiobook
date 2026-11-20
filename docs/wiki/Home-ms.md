@@ -17,6 +17,7 @@ Setiap langkah mempunyai satu halaman yang menunjukkan tangkapan skrin dan mener
 | 3 | [Langkah 3: Bercakap dengan Coqui TTS](Step-3-Speak-with-Coqui-TTS-ms) | Tukar satu bahagian teks kepada audio |
 | 4 | [Langkah 4: Tukar dan baris perintah](Step-4-Convert-and-Command-Line-ms) | Keseluruhan penukaran dari terminal |
 | 5 | [Langkah 5: Ujian dan kualiti](Step-5-Tests-and-Quality-ms) | Ujian, jenis data, gaya kod dan imbasan keselamatan |
+| 6 | [Langkah 6: Tetingkap bacaan teks](Step-6-Speak-Text-Window-ms) | Taip teks dan dengar melalui pembesar suara |
 
 Baca juga [Reka bentuk](Design-ms) untuk melihat bagaimana kod dilapiskan dan [Refleksi](Reflection-ms) untuk apa yang kita pelajari.
 

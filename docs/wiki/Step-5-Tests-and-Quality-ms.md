@@ -16,7 +16,7 @@ doxygen Doxyfile
 pwsh scripts/scan.ps1
 ```
 
-- 86 ujian pantas meliputi 99 peratus kod sumber. Satu fixture menyekat rangkaian, jadi tiada ujian yang boleh mencapai internet.
+- 110 ujian pantas meliputi 98 peratus kod sumber. Satu fixture menyekat rangkaian, jadi tiada ujian yang boleh mencapai internet.
 - `ruff` menyemak gaya kod, `mypy` dalam mod strict menyemak jenis data, dan Doxygen membina dokumentasi API daripada komen dalam kod sumber.
 - `scripts/scan.ps1` menjalankan imbasan keselamatan opengrep sebelum setiap push, dan hos menjalankannya sekali lagi pada setiap pull request.
 
