@@ -172,7 +172,7 @@ class SpeakWindow:
         """
         command(argument)
         ## Method posted to the main thread when speaking has ended.
-        self._root.after(0, self._finish)
+        self._post(self._finish)
 
     def _on_key(self, _event: object) -> None:
         """!@brief Update the button after the user typed in the text box.
@@ -188,7 +188,23 @@ class SpeakWindow:
         @return Nothing.
         """
         ## Method posted to the main thread to update the widgets.
-        self._root.after(0, self.refresh)
+        self._post(self.refresh)
+
+    def _post(self, callback: Callable[[], None]) -> None:
+        """!@brief Run a callback on the main thread; ignore a closed window.
+
+        A worker thread can finish after the user closed the window; then there
+        is no main loop to run the callback and nothing left to update.
+
+        @param callback The function to run on the main thread.
+        @return Nothing.
+        """
+        import tkinter as tk  # Lazy: the package must import without a display.
+
+        try:
+            self._root.after(0, callback)
+        except (tk.TclError, RuntimeError):
+            return
 
     def _finish(self) -> None:
         """!@brief Refresh after a finished command and call on_finished.
@@ -287,10 +303,24 @@ def _run_window(
 
         root.after(0, start_script)
     root.mainloop()
-    root.destroy()
+    _destroy(root)
     if script is not None and model.status != STATUS_DONE:
         return EXIT_ERROR
     return EXIT_OK
+
+
+def _destroy(root: "tk.Tk") -> None:
+    """!@brief Destroy the root window unless the user already closed it.
+
+    @param root The Tk root window.
+    @return Nothing.
+    """
+    import tkinter as tk  # Lazy: the package must import without a display.
+
+    try:
+        root.destroy()
+    except tk.TclError:
+        return
 
 
 def _build_parser() -> argparse.ArgumentParser:

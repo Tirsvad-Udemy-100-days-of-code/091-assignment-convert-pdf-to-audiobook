@@ -172,3 +172,35 @@ def test_window_stop_and_key_events_refresh_without_error(
     window._on_key(None)
     assert not window.click_speak()
     assert not window.click_open()
+
+
+def test_main_returns_zero_when_the_user_already_closed_the_window(
+    fake_tk: type[FakeTk], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def _already_destroyed(self: FakeTk) -> None:
+        raise FakeTclError("application has been destroyed")
+
+    monkeypatch.setattr(FakeTk, "destroy", _already_destroyed)
+    monkeypatch.setattr(FakeTk, "mainloop", lambda self: None)
+    code = main(
+        [],
+        engine_factory=lambda _name: FakeSpeechEngine(),
+        player_factory=FakePlayer,
+    )
+    assert code == 0
+
+
+@pytest.mark.parametrize("error", [FakeTclError("destroyed"), RuntimeError("loop")])
+def test_late_worker_update_after_close_does_not_raise(
+    fake_tk: type[FakeTk], monkeypatch: pytest.MonkeyPatch, error: Exception
+) -> None:
+    model = SpeakViewModel(FakeSpeechEngine(), FakePlayer(), lambda _path: "x")
+    root = FakeTk()
+    SpeakWindow(root, model, FakeFileChooser(None))
+
+    def _closed(self: FakeTk, delay: int, callback: Callable[[], None]) -> None:
+        raise error
+
+    monkeypatch.setattr(FakeTk, "after", _closed)
+    model.speak("Hello there.")
+    assert model.status == "Done"
