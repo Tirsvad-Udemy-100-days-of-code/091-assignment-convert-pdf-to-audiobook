@@ -1,15 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="708" height="170" viewBox="0 0 708 170" role="img" aria-label="Step 3: speak a sentence with Coqui TTS">
-  <rect width="708" height="170" rx="8" fill="#0d1117"/>
-  <rect width="708" height="34" rx="8" fill="#161b22"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="649" height="250" viewBox="0 0 649 250" role="img" aria-label="Step 3: speak a sentence with Coqui TTS">
+  <rect width="649" height="250" rx="8" fill="#0d1117"/>
+  <rect width="649" height="34" rx="8" fill="#161b22"/>
   <circle cx="20" cy="17" r="6" fill="#ff5f56"/>
   <circle cx="40" cy="17" r="6" fill="#ffbd2e"/>
   <circle cx="60" cy="17" r="6" fill="#27c93f"/>
-  <text x="354" y="22" fill="#8b949e" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="13">Step 3: speak a sentence with Coqui TTS</text>
+  <text x="324" y="22" fill="#8b949e" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="13">Step 3: speak a sentence with Coqui TTS</text>
   <g font-family="Consolas, Menlo, monospace" font-size="14">
   <text x="18" y="67" fill="#7ee787">$ </text><text x="34.8" y="67" fill="#e6edf3" xml:space="preserve">python tools/demo_speak.py &quot;Coqui TTS turns this sentence into speech.&quot;</text>
-  <text x="18" y="87" fill="#c9d1d9" xml:space="preserve">Traceback (most recent call last):</text>
-  <text x="18" y="107" fill="#c9d1d9" xml:space="preserve">  File &quot;&lt;repo&gt;\tools\demo_speak.py&quot;, line 14, in &lt;module&gt;</text>
-  <text x="18" y="127" fill="#c9d1d9" xml:space="preserve">    from pdf_to_audiobook.infrastructure.coqui_engine import CoquiSpeechEngine</text>
-  <text x="18" y="147" fill="#c9d1d9" xml:space="preserve">ModuleNotFoundError: No module named &#x27;pdf_to_audiobook&#x27;</text>
+  <text x="18" y="87" fill="#c9d1d9" xml:space="preserve">Wrote 153164 bytes of WAV audio</text>
+  <text x="18" y="107" fill="#c9d1d9" xml:space="preserve">Sample rate 22050 Hz, channels 1</text>
+  <text x="18" y="127" fill="#c9d1d9" xml:space="preserve">About 3.5 seconds of speech</text>
+  <text x="18" y="147" fill="#c9d1d9" xml:space="preserve"></text>
+  <text x="18" y="167" fill="#c9d1d9" xml:space="preserve">Fetching 5 files:   0%|          | 0/5 [00:00&lt;?, ?it/s]</text>
+  <text x="18" y="187" fill="#c9d1d9" xml:space="preserve">Fetching 5 files: 100%|██████████| 5/5 [00:00&lt;00:00, 1844.79it/s]</text>
+  <text x="18" y="207" fill="#c9d1d9" xml:space="preserve">koʊki ti ti ɛs tɚnz ðɪs sɛntəns ɪntu spit͡ʃ.</text>
+  <text x="18" y="227" fill="#c9d1d9" xml:space="preserve">Character &#x27;͡&#x27; not found in the vocabulary. Discarding it.</text>
   </g>
 </svg>
