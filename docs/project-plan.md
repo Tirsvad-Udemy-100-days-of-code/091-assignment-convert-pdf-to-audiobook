@@ -4,15 +4,15 @@
 | Key | Value |
 | --- | --- |
 | ID | PP-001 |
-| CrossReference | [BC-001], [SA-001], [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005] |
+| CrossReference | [BC-001], [SA-001], [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006] |
 | Language | en |
 | Domain | it |
 
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [77d0001] |
 | 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Accepted by the Product Owner S01 through acceptance of the plan in chat on 2026-11-20; no checklist exists for the Project Plan | [77d0001] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-006 Speak text window, accepted by S01 in chat | pending |
 
 ---
 
@@ -36,6 +36,7 @@ The plan schedules the five gateways of the PDF to Audiobook project over three 
 | Speech engines | [MIL-003] | 2026-11-21 | 2026-11-21 | S01 | none | Coqui TTS engine behind a port | [Milestone 3][MS-3] |
 | Converter and CLI | [MIL-004] | 2026-11-21 | 2026-11-21 | S01 | none | `convert_pdf_to_audiobook` and the command line | [Milestone 4][MS-4] |
 | Documentation and wiki | [MIL-005] | 2026-11-22 | 2026-11-22 | S01 | none | README, Doxygen, wiki in en, da, ms with screenshots | [Milestone 5][MS-5] |
+| Speak text window | [MIL-006] | 2026-11-22 | 2026-11-22 | S01 | none | Desktop window that speaks typed text through the speakers | to be published |
 
 ```plantuml
 @startgantt
@@ -69,6 +70,7 @@ Project starts 2026-11-20
 
 ```
 MIL-001 -> MIL-002 -> MIL-003 -> MIL-004 -> MIL-005
+MIL-004 -> MIL-006
 ```
 
 A No-Go on a gateway moves every later date by the time needed to fix it; the end date 2026-11-22 is then re-planned with S01.
@@ -95,6 +97,7 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MIL-003]: ./milestones/mil-003-speech-engines.md
 [MIL-004]: ./milestones/mil-004-converter-and-cli.md
 [MIL-005]: ./milestones/mil-005-documentation-and-wiki.md
+[MIL-006]: ./milestones/mil-006-speak-text-window.md
 [77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0
 [MS-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/671
 [MS-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/672
