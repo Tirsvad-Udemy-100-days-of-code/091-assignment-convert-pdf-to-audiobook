@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | S01 | Accepted by S01 as Product Owner through plan acceptance in chat; no checklist exists for the Traceability Matrix | [77d0001] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Restored the Purpose, Traceability Table, Concern Coverage and Open Inconsistencies sections that the previous row lost, and added the review records of the code and the wiki; accepted by S01 as Product Owner, no checklist exists | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Restored the Purpose, Traceability Table, Concern Coverage and Open Inconsistencies sections that the previous row lost, and added the review records of the code and the wiki; accepted by S01 as Product Owner, no checklist exists | [b5d55d7] |
 
 ---
 
@@ -77,3 +77,4 @@ updated whenever an artifact instance is created or reviewed.
 [RC-013]: ./reviews/rc-013-mil-004-code.md
 [RC-011]: ./reviews/rc-011-adr-0001-delta.md
 [RC-014]: ./reviews/rc-014-wiki.md
+[b5d55d7]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/b5d55d71f50333d9eb9e69b15530d8d90eeb9fb0
