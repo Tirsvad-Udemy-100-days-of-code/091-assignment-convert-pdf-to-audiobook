@@ -18,3 +18,10 @@ EXIT_OK: Final[int] = 0
 EXIT_ERROR: Final[int] = 1
 ## Exit code when the command line was used wrongly.
 EXIT_USAGE: Final[int] = 2
+
+## Pattern of a paragraph break: a blank line, with optional spaces on it.
+PARAGRAPH_BREAK_PATTERN: Final[str] = r"\n\s*\n"
+## Pattern of the whitespace after a sentence end (. ! or ?).
+SENTENCE_BREAK_PATTERN: Final[str] = r"(?<=[.!?])\s+"
+## Separator placed between the text of two pages.
+PAGE_SEPARATOR: Final[str] = "\n\n"
