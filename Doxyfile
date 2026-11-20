@@ -1,0 +1,38 @@
+# Doxygen configuration for PDF to Audiobook.
+# Run from the repository root:  doxygen Doxyfile
+# Output goes to docs/doxygen/ (ignored by git).
+
+PROJECT_NAME           = "PDF to Audiobook"
+PROJECT_BRIEF          = "Convert a PDF file into an audiobook with text-to-speech"
+PROJECT_NUMBER         = 0.1.0
+OUTPUT_DIRECTORY       = docs/doxygen
+CREATE_SUBDIRS         = NO
+OUTPUT_LANGUAGE        = English
+MARKDOWN_SUPPORT       = YES
+
+# Python sources
+INPUT                  = src
+FILE_PATTERNS          = *.py
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */__pycache__/* */.venv/*
+OPTIMIZE_OUTPUT_JAVA   = YES
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+JAVADOC_AUTOBRIEF      = YES
+AUTOLINK_SUPPORT       = YES
+
+# Warn about public items without comments
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+WARN_AS_ERROR          = NO
+WARN_LOGFILE           = docs/doxygen/warnings.log
+
+# Output formats
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+SOURCE_BROWSER         = YES
+HAVE_DOT               = NO
