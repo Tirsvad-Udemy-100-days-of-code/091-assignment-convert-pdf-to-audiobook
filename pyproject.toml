@@ -19,6 +19,9 @@ dependencies = [
   "torchaudio>=2.9",
 ]
 
+[project.scripts]
+pdf-to-audiobook = "pdf_to_audiobook.presentation.cli:main"
+
 [project.optional-dependencies]
 dev = [
   "pytest>=8.3",

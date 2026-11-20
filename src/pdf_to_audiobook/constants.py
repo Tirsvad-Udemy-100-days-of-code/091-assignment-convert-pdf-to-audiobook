@@ -32,3 +32,12 @@ PARAGRAPH_BREAK_PATTERN: Final[str] = r"\n\s*\n"
 SENTENCE_BREAK_PATTERN: Final[str] = r"(?<=[.!?])\s+"
 ## Separator placed between the text of two pages.
 PAGE_SEPARATOR: Final[str] = "\n\n"
+
+## Name of the command line program.
+PROGRAM_NAME: Final[str] = "pdf-to-audiobook"
+## Description shown in the command line help.
+PROGRAM_DESCRIPTION: Final[str] = "Convert a PDF file into an audiobook (WAV file)."
+## Mode that opens a WAV file for reading.
+WAV_READ_MODE: Final[str] = "rb"
+## Mode that opens a WAV file for writing.
+WAV_WRITE_MODE: Final[str] = "wb"
