@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; autonomous stand-in for S01, not independent | pending |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Initial version; autonomous stand-in for S01, not independent | [f9d3d54] |
 
 ---
 
@@ -59,3 +59,4 @@ Go — no Mandatory criterion fails. The review is not independent: the author r
 
 [MIL-009]: ../../milestones/mil-009-loading-status.md
 [QC-PY-001]: ../../../framework/qc/code/qc-programming-python.md
+[f9d3d54]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/f9d3d54e26cf220a9cb35926c2ace46073ac83cc
