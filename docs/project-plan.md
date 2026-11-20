@@ -4,15 +4,15 @@
 | Key | Value |
 | --- | --- |
 | ID | PP-001 |
-| CrossReference | [BC-001], [SA-001], [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006], [MIL-007] |
+| CrossReference | [BC-001], [SA-001], [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006], [MIL-007], [MIL-008] |
 | Language | en |
 | Domain | it |
 
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-006 Speak text window, accepted by S01 in chat | [55d704e] |
 | 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-007 Open PDF in the window, accepted by S01 in chat | [ee19880] |
+| 2026-11-21 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-008 Quiet console, accepted by S01 in chat | [af93f22] |
 
 ---
 
@@ -38,6 +38,7 @@ The plan schedules the five gateways of the PDF to Audiobook project over three 
 | Documentation and wiki | [MIL-005] | 2026-11-22 | 2026-11-22 | S01 | none | README, Doxygen, wiki in en, da, ms with screenshots | [Milestone 5][MS-5] |
 | Speak text window | [MIL-006] | 2026-11-22 | 2026-11-22 | S01 | none | Desktop window that speaks typed text through the speakers | to be published |
 | Open PDF in the window | [MIL-007] | 2026-11-22 | 2026-11-22 | S01 | none | Open a PDF from the window and speak it | to be published |
+| Quiet console | [MIL-008] | 2026-11-22 | 2026-11-22 | S01 | none | Hide library output unless `--verbose` | to be published |
 
 ```plantuml
 @startgantt
@@ -71,7 +72,7 @@ Project starts 2026-11-20
 
 ```
 MIL-001 -> MIL-002 -> MIL-003 -> MIL-004 -> MIL-005
-MIL-004 -> MIL-006 -> MIL-007
+MIL-004 -> MIL-006 -> MIL-007 -> MIL-008
 ```
 
 A No-Go on a gateway moves every later date by the time needed to fix it; the end date 2026-11-22 is then re-planned with S01.
@@ -100,6 +101,7 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MIL-005]: ./milestones/mil-005-documentation-and-wiki.md
 [MIL-006]: ./milestones/mil-006-speak-text-window.md
 [MIL-007]: ./milestones/mil-007-open-pdf-in-window.md
+[MIL-008]: ./milestones/mil-008-quiet-console.md
 [77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0
 [MS-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/671
 [MS-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/672
@@ -108,3 +110,4 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MS-5]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/675
 [55d704e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/55d704ea3336af57f7634bf48a9d23f85ec10845
 [ee19880]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/ee198802ba382293f2aae14950aa65ff5ba82dea
+[af93f22]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/af93f22d55f08dae087745bc41a00af2f4b93e60
