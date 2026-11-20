@@ -22,3 +22,4 @@ Exit codes: 0 success, 1 an error with a message on stderr, 2 wrong use of the c
 - Dependencies point inward: the use case knows the port and a function, not Coqui TTS or `pypdf`.
 - Progress and errors go to stderr and the result to stdout, so the program works in scripts.
 - A real run on the two page sample PDF gave about 17 seconds of speech.
+- The console stays quiet: the speech library prints phoneme text, warnings and download bars, so the program hides them and shows only its own lines. Add `--verbose` to the command or to the window to see the library output again when you diagnose a problem. Real errors are always shown.

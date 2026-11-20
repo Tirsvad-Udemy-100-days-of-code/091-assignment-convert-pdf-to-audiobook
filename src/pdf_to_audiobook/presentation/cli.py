@@ -1,6 +1,7 @@
 """@brief Command line entry point and composition root."""
 
 import argparse
+import functools
 import sys
 from collections.abc import Callable, Sequence
 from pathlib import Path
@@ -16,6 +17,7 @@ from pdf_to_audiobook.constants import (
     EXIT_USAGE,
     PROGRAM_DESCRIPTION,
     PROGRAM_NAME,
+    VERBOSE_HELP,
 )
 from pdf_to_audiobook.domain.errors import AudiobookError
 from pdf_to_audiobook.domain.speech import SpeechEngine
@@ -30,14 +32,19 @@ def main(
     """!@brief Run the command line program.
 
     @param argv The arguments without the program name; defaults to sys.argv.
-    @param engine_factory Builds an engine from a model name; defaults to Coqui.
+    @param engine_factory Builds an engine from a model name; defaults to Coqui
+        (which honours --verbose).
     @return The exit code.
     """
     try:
         args = _build_parser().parse_args(argv)
     except SystemExit as exit_request:
         return EXIT_OK if exit_request.code in (0, None) else EXIT_USAGE
-    factory = engine_factory if engine_factory is not None else _coqui_engine
+    factory = (
+        engine_factory
+        if engine_factory is not None
+        else functools.partial(CoquiSpeechEngine, verbose=args.verbose)
+    )
     pdf_path = Path(args.pdf)
     output_path = (
         Path(args.output) if args.output else pdf_path.with_suffix(AUDIO_FILE_SUFFIX)
@@ -75,16 +82,8 @@ def _build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_MODEL_NAME,
         help="Coqui TTS model name (default: %(default)s)",
     )
+    parser.add_argument("--verbose", action="store_true", help=VERBOSE_HELP)
     return parser
-
-
-def _coqui_engine(model_name: str) -> SpeechEngine:
-    """!@brief Build the real speech engine.
-
-    @param model_name Name of the Coqui TTS model.
-    @return The engine; the model loads on first use.
-    """
-    return CoquiSpeechEngine(model_name)
 
 
 def _print_progress(done: int, total: int) -> None:

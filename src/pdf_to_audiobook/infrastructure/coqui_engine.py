@@ -14,6 +14,7 @@ from pdf_to_audiobook.constants import (
 )
 from pdf_to_audiobook.domain.errors import EngineUnavailableError, SpeechEngineError
 from pdf_to_audiobook.domain.speech import AudioClip
+from pdf_to_audiobook.infrastructure.quiet_output import quiet_output
 
 
 class TtsModel(Protocol):
@@ -60,17 +61,23 @@ class CoquiSpeechEngine:
     """!@brief SpeechEngine that uses a local Coqui TTS model."""
 
     def __init__(
-        self, model_name: str = DEFAULT_MODEL_NAME, loader: TtsLoader | None = None
+        self,
+        model_name: str = DEFAULT_MODEL_NAME,
+        loader: TtsLoader | None = None,
+        verbose: bool = False,
     ) -> None:
         """!@brief Create the engine without loading the model.
 
         @param model_name Name of the Coqui TTS model to use.
         @param loader Function that loads a model; defaults to the real Coqui TTS.
+        @param verbose True shows the console output of the library.
         """
         ## Name of the model to load.
         self._model_name = model_name
         ## Function that loads the model.
         self._loader: TtsLoader = loader if loader is not None else load_coqui_model
+        ## True when the output of the library is shown.
+        self._verbose = verbose
         ## The loaded model; None until the first call.
         self._model: TtsModel | None = None
 
@@ -87,7 +94,8 @@ class CoquiSpeechEngine:
         with tempfile.TemporaryDirectory() as folder:
             wav_path = Path(folder) / SPEECH_TEMP_FILE_NAME
             try:
-                model.tts_to_file(text=text, file_path=str(wav_path))
+                with quiet_output(not self._verbose):
+                    model.tts_to_file(text=text, file_path=str(wav_path))
             except (OSError, RuntimeError, ValueError, KeyError) as error:
                 raise SpeechEngineError(f"Speech synthesis failed: {error}") from error
             return _read_clip(wav_path)
@@ -98,7 +106,8 @@ class CoquiSpeechEngine:
         @return The loaded model.
         """
         if self._model is None:
-            self._model = self._loader(self._model_name)
+            with quiet_output(not self._verbose):
+                self._model = self._loader(self._model_name)
         return self._model
 
 

@@ -24,3 +24,4 @@ pwsh scripts/gui-test.ps1
 - A second port next to the speech port made the playback easy to replace in tests: no test makes a sound.
 - A GUI is best tested in a container: the window, its log and its screenshot come back as files.
 - Playback is one more dependency, so the decision is recorded in ADR-0002. On Linux the system needs `libportaudio2`.
+- The console stays quiet: the speech library prints phoneme text, warnings and download bars, so the program hides them and shows only its own lines. Add `--verbose` to the command or to the window to see the library output again when you diagnose a problem. Real errors are always shown.

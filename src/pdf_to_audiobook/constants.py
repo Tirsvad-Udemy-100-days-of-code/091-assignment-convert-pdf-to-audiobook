@@ -71,3 +71,20 @@ FILE_DIALOG_TITLE: Final[str] = "Open a PDF file"
 PDF_FILE_TYPE_LABEL: Final[str] = "PDF files"
 ## Pattern of the PDF files shown in the dialog.
 PDF_FILE_PATTERN: Final[str] = "*.pdf"
+
+## Names of the library loggers that are silenced unless the user asks for verbose.
+QUIET_LOGGER_NAMES: Final[tuple[str, ...]] = (
+    "TTS",
+    "trainer",
+    "torch",
+    "huggingface_hub",
+    "urllib3",
+    "numba",
+)
+## Environment variables set while the library output is silenced.
+QUIET_ENVIRONMENT: Final[dict[str, str]] = {
+    "HF_HUB_DISABLE_PROGRESS_BARS": "1",
+    "TQDM_DISABLE": "1",
+}
+## Help text of the --verbose option.
+VERBOSE_HELP: Final[str] = "show the output of the speech library (default: hidden)"

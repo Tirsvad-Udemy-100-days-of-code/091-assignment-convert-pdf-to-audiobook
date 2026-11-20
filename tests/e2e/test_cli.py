@@ -99,7 +99,7 @@ def test_main_default_factory_builds_coqui_engine(
     built: list[str] = []
 
     class StubEngine(FakeSpeechEngine):
-        def __init__(self, model_name: str) -> None:
+        def __init__(self, model_name: str, verbose: bool) -> None:
             super().__init__()
             built.append(model_name)
 
@@ -118,3 +118,22 @@ def test_module_help_runs_in_subprocess() -> None:
     )
     assert result.returncode == 0
     assert "usage" in result.stdout.lower()
+
+
+@pytest.mark.parametrize(("flags", "expected"), [([], False), (["--verbose"], True)])
+def test_main_passes_verbose_to_the_default_engine(
+    make_pdf: MakePdf,
+    monkeypatch: pytest.MonkeyPatch,
+    flags: list[str],
+    expected: bool,
+) -> None:
+    seen: list[bool] = []
+
+    class StubEngine(FakeSpeechEngine):
+        def __init__(self, model_name: str, verbose: bool) -> None:
+            super().__init__()
+            seen.append(verbose)
+
+    monkeypatch.setattr(cli, "CoquiSpeechEngine", StubEngine)
+    assert cli.main([str(make_pdf(["Some text."])), *flags]) == EXIT_OK
+    assert seen == [expected]

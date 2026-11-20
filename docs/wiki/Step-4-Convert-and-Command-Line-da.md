@@ -22,3 +22,4 @@ Afslutningskoder: 0 succes, 1 en fejl med en besked på stderr, 2 forkert brug a
 - Afhængigheder peger indad: brugstilfældet kender porten og en funktion, ikke Coqui TTS eller `pypdf`.
 - Fremdrift og fejl går til stderr og resultatet til stdout, så programmet fungerer i scripts.
 - En rigtig kørsel på den to sider lange eksempel-PDF gav omkring 17 sekunders tale.
+- Konsollen er rolig: talebiblioteket udskriver fonemtekst, advarsler og download-bjælker, så programmet skjuler dem og viser kun sine egne linjer. Tilføj `--verbose` til kommandoen eller til vinduet for at se bibliotekets output igen, når du søger fejl. Rigtige fejl vises altid.

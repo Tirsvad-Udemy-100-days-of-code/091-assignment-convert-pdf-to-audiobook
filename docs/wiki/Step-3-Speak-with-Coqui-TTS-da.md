@@ -19,3 +19,4 @@ python tools/demo_speak.py "Coqui TTS turns this sentence into speech."
 - En port holder resten af programmet uafhængigt af motoren, så en anden motor blot er én ny klasse.
 - Standardtestene bruger en falsk motor, så de kører på brøkdele af et sekund med netværket blokeret. Én test markeret `slow` bruger den rigtige motor (`python -m pytest -m slow`).
 - Valg af model er en afvejning: modellen `vits` kræver systemprogrammet `espeak-ng`, mens `tacotron2-DCA` kun kræver Python-pakker.
+- Konsollen er rolig: talebiblioteket udskriver fonemtekst, advarsler og download-bjælker, så programmet skjuler dem og viser kun sine egne linjer. Tilføj `--verbose` til kommandoen eller til vinduet for at se bibliotekets output igen, når du søger fejl. Rigtige fejl vises altid.

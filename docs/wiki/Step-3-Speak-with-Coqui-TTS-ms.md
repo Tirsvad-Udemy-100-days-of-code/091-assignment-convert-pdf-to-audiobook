@@ -19,3 +19,4 @@ python tools/demo_speak.py "Coqui TTS turns this sentence into speech."
 - Port memastikan bahagian lain program bebas daripada enjin, jadi enjin lain hanyalah satu kelas baharu.
 - Ujian lalai menggunakan enjin palsu (fake), jadi ia berjalan dalam sebahagian kecil saat dengan rangkaian disekat. Satu ujian bertanda `slow` menggunakan enjin sebenar (`python -m pytest -m slow`).
 - Memilih model ialah pertukaran (trade-off): model `vits` memerlukan program sistem `espeak-ng`, manakala `tacotron2-DCA` hanya memerlukan pakej Python.
+- Konsol kekal senyap: pustaka pertuturan mencetak teks fonem, amaran dan bar muat turun, jadi program menyembunyikannya dan hanya menunjukkan barisnya sendiri. Tambah `--verbose` pada arahan atau tetingkap untuk melihat output pustaka semula apabila anda menyiasat masalah. Ralat sebenar sentiasa dipaparkan.

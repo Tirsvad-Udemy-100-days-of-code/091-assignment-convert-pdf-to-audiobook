@@ -1,6 +1,7 @@
 """@brief Tkinter window that speaks typed text or a PDF file, and its root."""
 
 import argparse
+import functools
 import sys
 import threading
 from collections.abc import Callable, Sequence
@@ -13,6 +14,7 @@ from pdf_to_audiobook.constants import (
     EXIT_OK,
     EXIT_USAGE,
     STATUS_DONE,
+    VERBOSE_HELP,
     WINDOW_PROGRAM_DESCRIPTION,
     WINDOW_PROGRAM_NAME,
     WINDOW_TITLE,
@@ -255,7 +257,9 @@ def main(
         args = _build_parser().parse_args(argv)
     except SystemExit as exit_request:
         return EXIT_OK if exit_request.code in (0, None) else EXIT_USAGE
-    engine = (engine_factory or CoquiSpeechEngine)(args.model)
+    engine = (
+        engine_factory or functools.partial(CoquiSpeechEngine, verbose=args.verbose)
+    )(args.model)
     player = (player_factory or SoundDevicePlayer)()
     chooser = (chooser_factory or TkFileChooser)()
     model = SpeakViewModel(engine, player, _extract_text)
@@ -336,6 +340,7 @@ def _build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_MODEL_NAME,
         help="Coqui TTS model name (default: %(default)s)",
     )
+    parser.add_argument("--verbose", action="store_true", help=VERBOSE_HELP)
     parser.add_argument(
         "--script",
         help="type this text, speak it, and quit when done (for automated tests)",
