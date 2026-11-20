@@ -25,3 +25,4 @@ pwsh scripts/gui-test.ps1
 - Antara muka grafik paling baik diuji dalam bekas: tetingkap, log dan tangkapan skrin kembali sebagai fail.
 - Pemainan ialah satu kebergantungan lagi, jadi keputusan itu dicatat dalam ADR-0002. Pada Linux sistem memerlukan `libportaudio2`.
 - Konsol kekal senyap: pustaka pertuturan mencetak teks fonem, amaran dan bar muat turun, jadi program menyembunyikannya dan hanya menunjukkan barisnya sendiri. Tambah `--verbose` pada arahan atau tetingkap untuk melihat output pustaka semula apabila anda menyiasat masalah. Ralat sebenar sentiasa dipaparkan.
+- Bunyi pertama mengambil masa beberapa saat kerana model suara dimuatkan. Baris status kini menyatakan `Loading voice...` pada masa itu, jadi tetingkap tidak kelihatan beku. Enjin melaporkan permulaan pemuatan melalui satu panggilan balik pilihan, dan tetingkap menyambungkannya kepada status dalam akar komposisinya sahaja.

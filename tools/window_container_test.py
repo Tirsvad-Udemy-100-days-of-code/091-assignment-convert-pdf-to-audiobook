@@ -9,12 +9,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from tests.fakes import FakeFileChooser, FakePlayer, FakeSpeechEngine  # noqa: E402
+from tests.fakes import FakeFileChooser, FakePlayer, FakeTtsLoader  # noqa: E402
 
 from pdf_to_audiobook.constants import STATUS_DONE  # noqa: E402
 from pdf_to_audiobook.presentation.window import main  # noqa: E402
+from pdf_to_audiobook.presentation.window_model import SpeakViewModel  # noqa: E402
 
 SCRIPT_TEXT = "Hello from the window test. This is the second sentence."
+## Seconds the fake voice model takes to load, so the loading status is visible.
+FAKE_LOAD_SECONDS = 2.0
 
 
 def run(log_path: Path, hold: float, pdf: Path | None) -> int:
@@ -23,14 +26,16 @@ def run(log_path: Path, hold: float, pdf: Path | None) -> int:
     With a PDF path, a fake file chooser returns it and Open PDF is pressed;
     otherwise the script text is typed and Speak is pressed.
     """
-    engine = FakeSpeechEngine()
+    loader = FakeTtsLoader(seconds=FAKE_LOAD_SECONDS)
     player = FakePlayer()
+    models: list[SpeakViewModel] = []
     started = time.monotonic()
     chooser = FakeFileChooser(pdf)
     arguments = ["--open-pdf"] if pdf is not None else ["--script", SCRIPT_TEXT]
     code = main(
         [*arguments, "--hold", str(hold)],
-        engine_factory=lambda _model: engine,
+        tts_loader=loader,
+        on_model=models.append,
         player_factory=lambda: player,
         chooser_factory=lambda: chooser,
     )
@@ -40,7 +45,7 @@ def run(log_path: Path, hold: float, pdf: Path | None) -> int:
     mode = "open-pdf" if pdf is not None else "speak"
     line = (
         f"status={status} mode={mode} exit_code={code} chunks={len(player.clips)} "
-        f"texts={engine.texts!r} seconds={seconds:.1f}"
+        f"loads={loader.calls} statuses={models[0].history!r} seconds={seconds:.1f}"
     )
     log_path.parent.mkdir(parents=True, exist_ok=True)
     with log_path.open("a", encoding="utf-8", newline="\n") as log:

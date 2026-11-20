@@ -57,6 +57,8 @@ WINDOW_TITLE: Final[str] = "Speak text"
 STATUS_READY: Final[str] = "Ready"
 ## Status shown while text is spoken.
 STATUS_SPEAKING: Final[str] = "Speaking..."
+## Status shown while the voice model loads.
+STATUS_LOADING: Final[str] = "Loading voice..."
 ## Status shown when speaking finished.
 STATUS_DONE: Final[str] = "Done"
 ## Prefix of the status shown when speaking failed.

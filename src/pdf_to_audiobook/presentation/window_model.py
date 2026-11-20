@@ -9,13 +9,42 @@ from pdf_to_audiobook.application.speak_text import speak_text
 from pdf_to_audiobook.constants import (
     STATUS_DONE,
     STATUS_ERROR_PREFIX,
+    STATUS_LOADING,
     STATUS_READY,
     STATUS_SPEAKING,
     STATUS_SPEAKING_FILE_PREFIX,
     STATUS_STOPPED,
 )
 from pdf_to_audiobook.domain.errors import AudiobookError
-from pdf_to_audiobook.domain.speech import AudioPlayer, SpeechEngine
+from pdf_to_audiobook.domain.speech import AudioClip, AudioPlayer, SpeechEngine
+
+
+class _ReportingEngine:
+    """!@brief SpeechEngine that tells the view model after each synthesis."""
+
+    def __init__(
+        self, engine: SpeechEngine, on_synthesized: Callable[[], None]
+    ) -> None:
+        """!@brief Wrap an engine.
+
+        @param engine The engine that does the work.
+        @param on_synthesized Called after each clip has been synthesized.
+        """
+        ## The wrapped engine.
+        self._engine = engine
+        ## Called after each clip has been synthesized.
+        self._on_synthesized = on_synthesized
+
+    def synthesize(self, text: str) -> AudioClip:
+        """!@brief Speak one piece of text through the wrapped engine.
+
+        @param text The text to speak.
+        @return The spoken text as a WAV clip.
+        @throws SpeechEngineError If the text cannot be turned into audio.
+        """
+        clip = self._engine.synthesize(text)
+        self._on_synthesized()
+        return clip
 
 
 class SpeakViewModel:
@@ -35,20 +64,24 @@ class SpeakViewModel:
         @param extract_text Function that returns the text of a PDF file.
         @param on_change Called after status or busy changes; the view sets it.
         """
-        ## The speech engine.
-        self._engine = engine
+        ## The speech engine; it reports back after each synthesis.
+        self._engine: SpeechEngine = _ReportingEngine(engine, self._restore_speaking)
         ## The audio player.
         self._player = player
         ## Function that returns the text of a PDF file.
         self._extract_text = extract_text
         ## Set by stop(); read between two chunks.
         self._stop_requested = threading.Event()
+        ## The status shown while speaking, without the loading phase.
+        self._speaking_status = STATUS_SPEAKING
         ## Called after status or busy changes.
         self.on_change = on_change
         ## Text shown to the user about the last or current action.
         self.status: str = STATUS_READY
         ## True while a text or a PDF file is being spoken.
         self.busy: bool = False
+        ## Every status that was set, in order.
+        self.history: list[str] = [STATUS_READY]
 
     def can_speak(self, text: str) -> bool:
         """!@brief Tell whether the Speak command is available.
@@ -108,6 +141,16 @@ class SpeakViewModel:
             ),
         )
 
+    def notify_loading(self) -> None:
+        """!@brief Show that the voice model is loading; called by the engine.
+
+        Safe to call from a worker thread: the view posts its update to the
+        main thread.
+
+        @return Nothing.
+        """
+        self._update(STATUS_LOADING, busy=True)
+
     def stop(self) -> None:
         """!@brief Ask the running speech to end before its next chunk.
 
@@ -131,6 +174,7 @@ class SpeakViewModel:
         @return Nothing.
         """
         self._stop_requested.clear()
+        self._speaking_status = speaking_status
         self._update(speaking_status, busy=True)
         try:
             command()
@@ -139,6 +183,14 @@ class SpeakViewModel:
         else:
             stopped = self._stop_requested.is_set()
             self._update(STATUS_STOPPED if stopped else STATUS_DONE, busy=False)
+
+    def _restore_speaking(self) -> None:
+        """!@brief Show the speaking status again once the voice has loaded.
+
+        @return Nothing.
+        """
+        if self.status == STATUS_LOADING:
+            self._update(self._speaking_status, busy=True)
 
     def _update(self, status: str, *, busy: bool) -> None:
         """!@brief Set status and busy, then tell the view.
@@ -149,5 +201,6 @@ class SpeakViewModel:
         """
         self.status = status
         self.busy = busy
+        self.history.append(status)
         if self.on_change is not None:
             self.on_change()

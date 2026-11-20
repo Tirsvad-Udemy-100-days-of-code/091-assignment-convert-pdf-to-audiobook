@@ -120,7 +120,7 @@ Open a window, type text and press Speak, or press Open PDF to pick a PDF file, 
 pdf-to-audiobook-window
 ```
 
-It uses the same voice model as the converter and plays the sound with `sounddevice`. On Linux install the system library `libportaudio2` first.
+While the voice model loads, the status line says `Loading voice...`. It uses the same voice model as the converter and plays the sound with `sounddevice`. On Linux install the system library `libportaudio2` first.
 
 ## 🧪 Tests
 
