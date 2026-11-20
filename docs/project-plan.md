@@ -12,7 +12,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Accepted by the Product Owner S01 through acceptance of the plan in chat on 2026-11-20; no checklist exists for the Project Plan | [77d0001] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-006 Speak text window, accepted by S01 in chat | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Added MIL-006 Speak text window, accepted by S01 in chat | [55d704e] |
 
 ---
 
@@ -104,3 +104,4 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MS-3]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/673
 [MS-4]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/674
 [MS-5]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/675
+[55d704e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/55d704ea3336af57f7634bf48a9d23f85ec10845

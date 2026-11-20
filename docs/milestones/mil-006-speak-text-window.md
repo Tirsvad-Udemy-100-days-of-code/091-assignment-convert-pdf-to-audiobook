@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-015]; stand-in for S01, not independent; plan accepted by S01 in chat | pending |
+| 2026-11-20 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | [55d704e] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | S01 | Reviewed Go in [RC-015]; stand-in for S01, not independent; plan accepted by S01 in chat | [55d704e] |
 
 ---
 
@@ -78,3 +78,4 @@ A speak-text use case, an audio player port with a `sounddevice` adapter, a Tkin
 
 [BC-001]: ../business-case.md
 [RC-015]: ../sqa/reviews/rc-015-mil-006-speak-text-window.md
+[55d704e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/55d704ea3336af57f7634bf48a9d23f85ec10845
