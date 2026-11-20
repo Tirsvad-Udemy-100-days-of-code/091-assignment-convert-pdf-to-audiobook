@@ -21,21 +21,37 @@ The program extracts the text of a PDF with `pypdf`, splits it into pieces of at
 | --- | --- |
 | `src/pdf_to_audiobook/` | The program, in layers: `domain`, `application`, `infrastructure`, `presentation`. All constants are in `constants.py` |
 | `tests/` | pytest tests |
-| `docs/` | Business case, plan, milestones, reviews, images and the wiki |
+| `docs/` | Business case, plan, milestones, reviews, images and the wiki sources (`docs/wiki/`) |
 | `scripts/` | The opengrep security scan |
 | `tools/` | `capture_step.py`, which renders command output as an SVG image for the documentation |
 
-The project is built step by step; each step has a screenshot in this README and a page in the wiki:
+The project is built in five lecture steps. Each step has a screenshot below and a page in the [wiki][wiki] (English, Danish and Bahasa Malaysia) that explains what we gained.
 
-| Step | What it is | Screenshot |
-| --- | --- | --- |
-| 1 | Create the `.venv` and upgrade pip | ![Step 1][step-1] |
+### Step 1: Environment
+
+![Step 1: create the .venv and upgrade pip][step-1]
+
+### Step 2: Read the PDF
+
+![Step 2: read the PDF and split the text][step-2]
+
+### Step 3: Speak with Coqui TTS
+
+![Step 3: speak a sentence with Coqui TTS][step-3]
+
+### Step 4: Convert and command line
+
+![Step 4: convert a PDF to an audiobook][step-4]
+
+### Step 5: Tests and quality
+
+![Step 5: run the tests][step-5]
 
 ## 📋 Requirements
 
 - Python 3.13 or newer, because the project targets it.
 - `git`, to clone the repository.
-- `pypdf`, installed with the project, to read PDF files.
+- About 2 GB of free disk space and a few minutes: the project installs `pypdf`, Coqui TTS and PyTorch, and downloads a voice model (about 110 MB) on the first run. The speech engine runs on your own machine; no account and no paid service are needed.
 - Optional for development: opengrep (`~/.opengrep/cli/latest/opengrep.exe`) for the security scan, and Doxygen for the API documentation.
 
 ## 🛠️ Setup
@@ -68,7 +84,22 @@ The folder `.venv/` is ignored by git. Leave the environment with `deactivate`.
 
 ## ▶️ Run
 
-Not available yet: the converter and the command line are added in a later step. This README is updated with the command when they exist.
+With the virtual environment active, convert the sample PDF into a WAV file:
+
+```powershell
+python -m pdf_to_audiobook tests/data/sample.pdf -o build/sample.wav
+```
+
+The same program is installed as a command:
+
+```powershell
+pdf-to-audiobook my-book.pdf
+pdf-to-audiobook my-book.pdf -o audio/my-book.wav --model tts_models/en/ljspeech/tacotron2-DCA
+```
+
+Without `-o` the audio is written next to the PDF with the suffix `.wav`. Exit code 0 means success, 1 an error (the message is on stderr) and 2 a wrong command line.
+
+In Python the assignment's function is available as `convert_pdf_to_audiobook(pdf_path, output_path, engine, extract_text)`; see the [wiki][wiki] for the design.
 
 ## 🧪 Tests
 
@@ -76,6 +107,12 @@ With the virtual environment active:
 
 ```powershell
 python -m pytest
+```
+
+The real speech engine is tested by one slow test that is skipped by default and downloads the voice model on first use:
+
+```powershell
+python -m pytest -m slow
 ```
 
 Check the code style and the types:
@@ -123,7 +160,12 @@ The documents a newcomer needs, in reading order.
 [repository]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook
 [documentation]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/wiki
 [issues]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/issues
+[wiki]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/wiki
 [step-1]: ./docs/images/step-01-setup.svg
+[step-2]: ./docs/images/step-02-extract-text.svg
+[step-3]: ./docs/images/step-03-coqui-tts.svg
+[step-4]: ./docs/images/step-04-cli.svg
+[step-5]: ./docs/images/step-05-tests.svg
 [BC-001]: ./docs/business-case.md
 [SA-001]: ./docs/stakeholder-analysis.md
 [PP-001]: ./docs/project-plan.md
