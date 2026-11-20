@@ -28,7 +28,7 @@
 | --- | --- | --- | --- |
 | 1 | Packages, modules, functions, variables, classes and constants follow PEP 8 casing (`snake_case`, `PascalCase`, `UPPER_SNAKE`) | Pass | Package `pdf_to_audiobook`, constants in `UPPER_SNAKE`, functions in `snake_case`, classes none yet. |
 | 2 | Names state purpose in the domain's language; no unexplained abbreviations, no single-letter names outside tiny scopes | Pass | Names state purpose (`MAX_CHUNK_CHARS`, `AUDIO_FILE_SUFFIX`, `run_command`, `render_svg`). |
-| 3 | Code is produced by the project's formatter and passes its linter with no unexplained suppressions | Pass | `ruff format` applied; `ruff check src tests tools` reports no finding; no suppression except one `noqa: S602` with a reason. |
+| 3 | Code is produced by the project's formatter and passes its linter with no unexplained suppressions | Pass | `ruff format` applied; `ruff check src tests tools` reports no finding. |
 | 4 | Every function and method signature is type-annotated, including `-> None` | Pass | Every function in `tools/capture_step.py` is annotated; mypy strict passes on `src`. |
 | 5 | No bare `except:`, no swallowed exceptions; specific exceptions are raised and the cause is kept (`raise ... from`) | Pass | No `except` clause in the code of this milestone. |
 | 6 | No mutable default arguments and no shadowed builtins | Pass | No mutable defaults; no builtin is shadowed. |

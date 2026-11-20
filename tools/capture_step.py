@@ -17,7 +17,9 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import os
 import re
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -66,9 +68,11 @@ def run_command(
     @param replacements Text to hide in the output.
     @return Pairs of (kind, text) where kind is ``cmd`` or ``out``.
     """
-    result = subprocess.run(  # noqa: S602 - the commands are written by the maintainer
-        command,
-        shell=True,
+    arguments = [
+        part.strip("\"'") for part in shlex.split(command, posix=os.name != "nt")
+    ]
+    result = subprocess.run(
+        arguments,
         cwd=cwd,
         capture_output=True,
         text=True,
