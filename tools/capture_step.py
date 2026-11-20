@@ -22,8 +22,8 @@ import re
 import shlex
 import subprocess
 import sys
+from html import escape
 from pathlib import Path
-from xml.sax.saxutils import escape
 
 CHAR_WIDTH = 8.4
 LINE_HEIGHT = 20
@@ -71,7 +71,9 @@ def run_command(
     arguments = [
         part.strip("\"'") for part in shlex.split(command, posix=os.name != "nt")
     ]
-    result = subprocess.run(
+    # The commands come from the maintainer's own command line: running them is the
+    # purpose of this tool, and no shell is used.
+    result = subprocess.run(  # nosemgrep
         arguments,
         cwd=cwd,
         capture_output=True,

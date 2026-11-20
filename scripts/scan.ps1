@@ -3,7 +3,7 @@
     Runs the opengrep security scan on the repository. Run it before every push.
 
 .DESCRIPTION
-    Uses the rule sets p/secrets and p/python, fetched from the rule registry,
+    Uses the rule sets p/secrets, p/python and p/security-audit, fetched from the rule registry,
     and fails (non-zero exit code) when a finding is reported. The framework
     submodule and the local .env file are not scanned.
 
@@ -25,7 +25,7 @@ if (-not (Test-Path $Opengrep)) {
 
 Push-Location $root
 try {
-    & $Opengrep scan --config p/secrets --config p/python --error --quiet `
+    & $Opengrep scan --config p/secrets --config p/python --config p/security-audit --error --quiet `
         --exclude framework --exclude .venv --exclude .env --exclude docs/doxygen .
     $code = $LASTEXITCODE
 }
