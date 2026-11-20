@@ -15,3 +15,11 @@ class SpeechEngineError(AudiobookError):
 
 class EngineUnavailableError(SpeechEngineError):
     """@brief The speech engine is not installed or its model cannot be loaded."""
+
+
+class AudioJoinError(AudiobookError):
+    """!@brief Audio clips could not be joined or an audio file could not be written."""
+
+
+class OutputWriteError(AudiobookError):
+    """!@brief The audiobook file could not be written."""

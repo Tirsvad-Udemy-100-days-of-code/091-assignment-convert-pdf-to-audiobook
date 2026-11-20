@@ -71,6 +71,8 @@ def run_command(
     arguments = [
         part.strip("\"'") for part in shlex.split(command, posix=os.name != "nt")
     ]
+    if arguments and arguments[0] == "python":
+        arguments[0] = sys.executable  # run with the interpreter that runs this tool
     # The commands come from the maintainer's own command line: running them is the
     # purpose of this tool, and no shell is used.
     result = subprocess.run(  # nosemgrep
