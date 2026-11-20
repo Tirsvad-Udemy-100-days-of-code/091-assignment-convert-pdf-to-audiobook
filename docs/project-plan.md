@@ -31,11 +31,11 @@ The plan schedules the five gateways of the PDF to Audiobook project over three 
 
 | Gateway | Document | Window | Decision date | Owner | Stories | Main deliverable | Milestone |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Project foundation | [MIL-001] | 2026-11-20 | 2026-11-20 | S01 | none | Project skeleton, tooling, repository metadata | |
-| PDF text extraction | [MIL-002] | 2026-11-20 | 2026-11-20 | S01 | none | Text extraction and chunking with tests | |
-| Speech engines | [MIL-003] | 2026-11-21 | 2026-11-21 | S01 | none | Coqui TTS engine behind a port | |
-| Converter and CLI | [MIL-004] | 2026-11-21 | 2026-11-21 | S01 | none | `convert_pdf_to_audiobook` and the command line | |
-| Documentation and wiki | [MIL-005] | 2026-11-22 | 2026-11-22 | S01 | none | README, Doxygen, wiki in en, da, ms with screenshots | |
+| Project foundation | [MIL-001] | 2026-11-20 | 2026-11-20 | S01 | none | Project skeleton, tooling, repository metadata | [Milestone 1][MS-1] |
+| PDF text extraction | [MIL-002] | 2026-11-20 | 2026-11-20 | S01 | none | Text extraction and chunking with tests | [Milestone 2][MS-2] |
+| Speech engines | [MIL-003] | 2026-11-21 | 2026-11-21 | S01 | none | Coqui TTS engine behind a port | [Milestone 3][MS-3] |
+| Converter and CLI | [MIL-004] | 2026-11-21 | 2026-11-21 | S01 | none | `convert_pdf_to_audiobook` and the command line | [Milestone 4][MS-4] |
+| Documentation and wiki | [MIL-005] | 2026-11-22 | 2026-11-22 | S01 | none | README, Doxygen, wiki in en, da, ms with screenshots | [Milestone 5][MS-5] |
 
 ```plantuml
 @startgantt
@@ -96,3 +96,8 @@ A No-Go on a gateway moves every later date by the time needed to fix it; the en
 [MIL-004]: ./milestones/mil-004-converter-and-cli.md
 [MIL-005]: ./milestones/mil-005-documentation-and-wiki.md
 [77d0001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/commit/77d0001724a50e0bcd2472de88d61f866cf9ece0
+[MS-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/671
+[MS-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/672
+[MS-3]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/673
+[MS-4]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/674
+[MS-5]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/091-assignment-convert-pdf-to-audiobook/milestone/675
