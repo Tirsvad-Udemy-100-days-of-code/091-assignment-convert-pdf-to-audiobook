@@ -7,7 +7,7 @@ mkdir -p "$out"
 Xvfb :99 -screen 0 800x500x24 >"$out/xvfb.log" 2>&1 &
 export DISPLAY=:99
 sleep 2
-python tools/window_container_test.py --log "$out/window.log" --hold 4 &
+python tools/window_container_test.py --log "$out/window.log" --hold 4 --pdf /app/tests/data/sample.pdf &
 test_pid=$!
 sleep 3
 import -window root "$out/window.png"

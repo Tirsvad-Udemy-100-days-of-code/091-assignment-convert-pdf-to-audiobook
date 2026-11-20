@@ -61,3 +61,13 @@ STATUS_SPEAKING: Final[str] = "Speaking..."
 STATUS_DONE: Final[str] = "Done"
 ## Prefix of the status shown when speaking failed.
 STATUS_ERROR_PREFIX: Final[str] = "error: "
+## Status shown when the user stopped the speech.
+STATUS_STOPPED: Final[str] = "Stopped"
+## Prefix of the status shown while a PDF file is spoken; the file name follows.
+STATUS_SPEAKING_FILE_PREFIX: Final[str] = "Speaking: "
+## Title of the open-file dialog.
+FILE_DIALOG_TITLE: Final[str] = "Open a PDF file"
+## Label of the PDF entry in the file type list of the dialog.
+PDF_FILE_TYPE_LABEL: Final[str] = "PDF files"
+## Pattern of the PDF files shown in the dialog.
+PDF_FILE_PATTERN: Final[str] = "*.pdf"

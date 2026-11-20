@@ -46,3 +46,10 @@ def test_speak_text_propagates_engine_error() -> None:
 def test_speak_text_propagates_playback_error() -> None:
     with pytest.raises(PlaybackError):
         speak_text(TEXT, FakeSpeechEngine(), FakePlayer(error=PlaybackError("no")))
+
+
+def test_speak_text_stops_between_chunks() -> None:
+    engine, player = FakeSpeechEngine(), FakePlayer()
+    count = speak_text(TEXT, engine, player, should_stop=lambda: bool(player.clips))
+    assert count == 1
+    assert engine.texts == ["First paragraph here."]

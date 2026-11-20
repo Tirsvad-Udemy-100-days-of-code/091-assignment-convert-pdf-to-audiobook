@@ -18,6 +18,7 @@ Hvert trin har en side med et skærmbillede og en forklaring af, hvad vi fik ud 
 | 4 | [Trin 4: Konvertering og kommandolinje](Step-4-Convert-and-Command-Line-da) | Hele konverteringen fra en terminal |
 | 5 | [Trin 5: Tests og kvalitet](Step-5-Tests-and-Quality-da) | Tests, typer, stil og sikkerhedsscanningen |
 | 6 | [Trin 6: Vinduet der læser tekst op](Step-6-Speak-Text-Window-da) | Skriv tekst og hør den i højttalerne |
+| 7 | [Trin 7: Åbn en PDF i vinduet](Step-7-Open-PDF-in-the-Window-da) | Åbn en PDF og hør den, med en Stop-knap |
 
 Læs også [Design](Design-da) om, hvordan koden er opdelt i lag, og [Refleksion](Reflection-da) om, hvad vi lærte.
 
