@@ -5,9 +5,14 @@ from collections.abc import Callable
 from pathlib import Path
 
 import pytest
-from tests.fakes import FakeFileChooser, FakePlayer, FakeSpeechEngine
+from tests.fakes import (
+    FakeFileChooser,
+    FakePlayer,
+    FakeSpeechEngine,
+    FakeTtsLoader,
+)
 
-from pdf_to_audiobook.domain.errors import PlaybackError
+from pdf_to_audiobook.domain.errors import EngineUnavailableError, PlaybackError
 from pdf_to_audiobook.presentation import window
 from pdf_to_audiobook.presentation.window import SpeakWindow, main
 from pdf_to_audiobook.presentation.window_model import SpeakViewModel
@@ -217,7 +222,7 @@ def test_main_passes_verbose_to_the_default_engine(
     seen: list[bool] = []
 
     class StubEngine(FakeSpeechEngine):
-        def __init__(self, model_name: str, verbose: bool) -> None:
+        def __init__(self, model_name: str, verbose: bool, **options: object) -> None:
             super().__init__()
             seen.append(verbose)
 
@@ -225,3 +230,39 @@ def test_main_passes_verbose_to_the_default_engine(
     code = main([*flags, "--script", "Hello there."], player_factory=FakePlayer)
     assert code == 0
     assert seen == [expected]
+
+
+def test_main_default_engine_reports_loading_through_the_window(
+    fake_tk: type[FakeTk],
+) -> None:
+    models: list[SpeakViewModel] = []
+    loader = FakeTtsLoader()
+    code = main(
+        ["--script", "Hello there."],
+        player_factory=FakePlayer,
+        tts_loader=loader,
+        on_model=models.append,
+    )
+    assert code == 0
+    assert loader.calls == 1
+    assert models[0].history == [
+        "Ready",
+        "Speaking...",
+        "Loading voice...",
+        "Speaking...",
+        "Done",
+    ]
+
+
+def test_main_shows_load_failure_as_error(fake_tk: type[FakeTk]) -> None:
+    models: list[SpeakViewModel] = []
+    loader = FakeTtsLoader(error=EngineUnavailableError("no model"))
+    code = main(
+        ["--script", "Hello there."],
+        player_factory=FakePlayer,
+        tts_loader=loader,
+        on_model=models.append,
+    )
+    assert code == 1
+    assert models[0].status == "error: no model"
+    assert not models[0].busy

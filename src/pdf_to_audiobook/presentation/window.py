@@ -21,7 +21,7 @@ from pdf_to_audiobook.constants import (
 )
 from pdf_to_audiobook.domain.file_chooser import FileChooser
 from pdf_to_audiobook.domain.speech import AudioPlayer, SpeechEngine
-from pdf_to_audiobook.infrastructure.coqui_engine import CoquiSpeechEngine
+from pdf_to_audiobook.infrastructure.coqui_engine import CoquiSpeechEngine, TtsLoader
 from pdf_to_audiobook.infrastructure.sounddevice_player import SoundDevicePlayer
 from pdf_to_audiobook.infrastructure.tk_file_chooser import TkFileChooser
 from pdf_to_audiobook.presentation.window_model import SpeakViewModel
@@ -227,6 +227,27 @@ def _state(is_enabled: bool) -> Literal["normal", "disabled"]:
     return "normal" if is_enabled else "disabled"
 
 
+class _LoadingRelay:
+    """!@brief Forwards the engine's loading notice to the view model.
+
+    The engine is built before the view model exists; the relay is handed to
+    the engine first and given the model afterwards.
+    """
+
+    def __init__(self) -> None:
+        """!@brief Create a relay that is not yet connected."""
+        ## The view model that gets the notice; None until it exists.
+        self.model: SpeakViewModel | None = None
+
+    def notify(self) -> None:
+        """!@brief Tell the view model that the voice model is loading.
+
+        @return Nothing.
+        """
+        if self.model is not None:
+            self.model.notify_loading()
+
+
 def _extract_text(pdf_path: Path) -> str:
     """!@brief Read a PDF file; pypdf is imported on the first call only.
 
@@ -244,6 +265,8 @@ def main(
     engine_factory: Callable[[str], SpeechEngine] | None = None,
     player_factory: Callable[[], AudioPlayer] | None = None,
     chooser_factory: Callable[[], FileChooser] | None = None,
+    tts_loader: TtsLoader | None = None,
+    on_model: Callable[[SpeakViewModel], None] | None = None,
 ) -> int:
     """!@brief Open the speak window.
 
@@ -251,18 +274,28 @@ def main(
     @param engine_factory Builds an engine from a model name; defaults to Coqui.
     @param player_factory Builds the player; defaults to sounddevice.
     @param chooser_factory Builds the file chooser; defaults to the Tk dialog.
+    @param tts_loader Loads the voice model of the default engine; defaults to Coqui.
+    @param on_model Called with the view model once it is built (for tests).
     @return The exit code; in script mode 0 only if the speech ended as Done.
     """
     try:
         args = _build_parser().parse_args(argv)
     except SystemExit as exit_request:
         return EXIT_OK if exit_request.code in (0, None) else EXIT_USAGE
-    engine = (
-        engine_factory or functools.partial(CoquiSpeechEngine, verbose=args.verbose)
-    )(args.model)
+    relay = _LoadingRelay()
+    default_factory = functools.partial(
+        CoquiSpeechEngine,
+        loader=tts_loader,
+        verbose=args.verbose,
+        on_loading=relay.notify,
+    )
+    engine = (engine_factory or default_factory)(args.model)
     player = (player_factory or SoundDevicePlayer)()
     chooser = (chooser_factory or TkFileChooser)()
     model = SpeakViewModel(engine, player, _extract_text)
+    relay.model = model
+    if on_model is not None:
+        on_model(model)
     script = args.script
     if script is None and args.open_pdf:
         script = ""

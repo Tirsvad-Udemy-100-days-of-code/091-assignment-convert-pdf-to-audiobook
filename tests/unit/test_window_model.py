@@ -1,14 +1,22 @@
+import threading
 from pathlib import Path
 
 import pytest
-from tests.fakes import FakePlayer, FakeSpeechEngine, fake_extract_text
+from tests.fakes import (
+    FakePlayer,
+    FakeSpeechEngine,
+    FakeTtsLoader,
+    fake_extract_text,
+)
 
 from pdf_to_audiobook.constants import STATUS_DONE, STATUS_READY
 from pdf_to_audiobook.domain.errors import (
+    EngineUnavailableError,
     PdfTextError,
     PlaybackError,
     SpeechEngineError,
 )
+from pdf_to_audiobook.infrastructure.coqui_engine import CoquiSpeechEngine
 from pdf_to_audiobook.presentation.window_model import SpeakViewModel
 
 
@@ -152,3 +160,60 @@ def test_open_pdf_accepts_str_and_path(path: str | Path) -> None:
     model = SpeakViewModel(FakeSpeechEngine(), FakePlayer(), fake_extract_text())
     model.open_pdf(path)
     assert model.status == "Done"
+
+
+def loading_model(loader: FakeTtsLoader) -> tuple[SpeakViewModel, list[str]]:
+    relay: list[SpeakViewModel] = []
+    engine = CoquiSpeechEngine(
+        loader=loader, on_loading=lambda: relay[0].notify_loading()
+    )
+    model = SpeakViewModel(engine, FakePlayer(), fake_extract_text())
+    relay.append(model)
+    seen: list[str] = []
+    model.on_change = lambda: seen.append(model.status)
+    return model, seen
+
+
+def test_status_order_for_a_first_speak_with_loading() -> None:
+    model, seen = loading_model(FakeTtsLoader())
+    model.speak("One.\n\nTwo.")
+    assert seen == ["Speaking...", "Loading voice...", "Speaking...", "Done"]
+    assert model.history[-4:] == seen
+
+
+def test_status_order_when_the_model_is_already_loaded() -> None:
+    model, seen = loading_model(FakeTtsLoader())
+    model.speak("One.")
+    seen.clear()
+    model.speak("Two.")
+    assert seen == ["Speaking...", "Done"]
+
+
+def test_status_order_for_open_pdf_shows_the_file_name_again() -> None:
+    model, seen = loading_model(FakeTtsLoader())
+    model.open_pdf("book.pdf")
+    assert seen == [
+        "Speaking: book.pdf",
+        "Loading voice...",
+        "Speaking: book.pdf",
+        "Done",
+    ]
+
+
+def test_load_failure_ends_in_error_and_clears_busy() -> None:
+    failure = EngineUnavailableError("no model")
+    model, seen = loading_model(FakeTtsLoader(error=failure))
+    model.speak("One.")
+    assert seen == ["Speaking...", "Loading voice...", "error: no model"]
+    assert not model.busy
+
+
+def test_notify_loading_from_a_worker_thread_calls_on_change() -> None:
+    model = SpeakViewModel(FakeSpeechEngine(), FakePlayer(), fake_extract_text())
+    seen: list[str] = []
+    model.on_change = lambda: seen.append(model.status)
+    worker = threading.Thread(target=model.notify_loading)
+    worker.start()
+    worker.join()
+    assert seen == ["Loading voice..."]
+    assert model.busy

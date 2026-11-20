@@ -1,4 +1,5 @@
 import io
+import time
 import wave
 from collections.abc import Callable
 from pathlib import Path
@@ -81,3 +82,27 @@ def fake_extract_text(
         return text
 
     return _extract
+
+
+class FakeTtsModel:
+    """A Coqui model that writes a silent WAV file."""
+
+    def tts_to_file(self, *, text: str, file_path: str) -> object:
+        Path(file_path).write_bytes(build_wav_bytes())
+        return None
+
+
+class FakeTtsLoader:
+    """A model loader that counts its calls and can be slow or fail."""
+
+    def __init__(self, seconds: float = 0.0, error: Exception | None = None) -> None:
+        self.calls = 0
+        self._seconds = seconds
+        self._error = error
+
+    def __call__(self, model_name: str) -> FakeTtsModel:
+        self.calls += 1
+        time.sleep(self._seconds)
+        if self._error is not None:
+            raise self._error
+        return FakeTtsModel()

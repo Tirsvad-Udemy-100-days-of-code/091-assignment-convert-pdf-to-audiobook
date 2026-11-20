@@ -65,12 +65,14 @@ class CoquiSpeechEngine:
         model_name: str = DEFAULT_MODEL_NAME,
         loader: TtsLoader | None = None,
         verbose: bool = False,
+        on_loading: Callable[[], None] | None = None,
     ) -> None:
         """!@brief Create the engine without loading the model.
 
         @param model_name Name of the Coqui TTS model to use.
         @param loader Function that loads a model; defaults to the real Coqui TTS.
         @param verbose True shows the console output of the library.
+        @param on_loading Called once, just before the model is loaded.
         """
         ## Name of the model to load.
         self._model_name = model_name
@@ -78,6 +80,8 @@ class CoquiSpeechEngine:
         self._loader: TtsLoader = loader if loader is not None else load_coqui_model
         ## True when the output of the library is shown.
         self._verbose = verbose
+        ## Called once, just before the model is loaded.
+        self._on_loading = on_loading
         ## The loaded model; None until the first call.
         self._model: TtsModel | None = None
 
@@ -106,6 +110,8 @@ class CoquiSpeechEngine:
         @return The loaded model.
         """
         if self._model is None:
+            if self._on_loading is not None:
+                self._on_loading()
             with quiet_output(not self._verbose):
                 self._model = self._loader(self._model_name)
         return self._model

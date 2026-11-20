@@ -177,3 +177,29 @@ def test_default_loader_wraps_model_load_failure(
     monkeypatch.setitem(sys.modules, "TTS.api", api)
     with pytest.raises(EngineUnavailableError, match="download failed"):
         load_coqui_model("some-model")
+
+
+def test_on_loading_is_called_once_for_two_calls() -> None:
+    calls: list[str] = []
+    engine = CoquiSpeechEngine(
+        loader=CountingLoader(StubModel()), on_loading=lambda: calls.append("load")
+    )
+    engine.synthesize("One.")
+    engine.synthesize("Two.")
+    assert calls == ["load"]
+
+
+def test_on_loading_is_called_before_the_model_loads() -> None:
+    order: list[str] = []
+
+    def loader(model_name: str) -> TtsModel:
+        order.append("loader")
+        return StubModel()
+
+    engine = CoquiSpeechEngine(loader=loader, on_loading=lambda: order.append("notice"))
+    engine.synthesize("One.")
+    assert order == ["notice", "loader"]
+
+
+def test_no_callback_means_no_error() -> None:
+    CoquiSpeechEngine(loader=CountingLoader(StubModel())).synthesize("One.")

@@ -25,3 +25,4 @@ pwsh scripts/gui-test.ps1
 - En grafisk brugerflade testes bedst i en container: vinduet, loggen og skærmbilledet kommer tilbage som filer.
 - Afspilning er en afhængighed mere, så beslutningen står i ADR-0002. På Linux skal systemet have `libportaudio2`.
 - Konsollen er rolig: talebiblioteket udskriver fonemtekst, advarsler og download-bjælker, så programmet skjuler dem og viser kun sine egne linjer. Tilføj `--verbose` til kommandoen eller til vinduet for at se bibliotekets output igen, når du søger fejl. Rigtige fejl vises altid.
+- Den første lyd tager flere sekunder, fordi stemmemodellen indlæses. Statuslinjen siger nu `Loading voice...` i den tid, så vinduet ikke ser frosset ud. Motoren melder starten af indlæsningen gennem ét valgfrit kald, og vinduet forbinder det til statussen kun i sin kompositionsrod.
